@@ -88,6 +88,21 @@ export default function ShowcaseGallery() {
         { label: 'Alert Audio', value: 'Chime & Vibration' },
         { label: 'Pack Radius', value: '500m - 5km' }
       ]
+    }, 
+    {
+      id: 'out-of-circle-ui',
+      title: 'Detour & Out-Of-Bounds Alert',
+      badge: 'Route Governance',
+      subtitle: 'Instant warning overlay when a rider strays from convoy',
+      description: 'Proactively identifies stragglers and wrong-turn detours before anyone gets lost. Visual red HUD overlay triggers automatically.',
+      src: outOfCircle,
+      isPro: false,
+      metrics: [
+        { label: 'Deviation Detect', value: 'Automatic' },
+        { label: 'Re-route Guidance', value: 'Instant Turn' },
+        { label: 'Squad Notice', value: 'Tail-End Alert' },
+        { label: 'Off-Route HUD', value: 'High Visibility' }
+      ]
     },
     {
       id: 'telemetry-ui',
@@ -102,21 +117,6 @@ export default function ShowcaseGallery() {
         { label: 'G-Force Tracking', value: '3-Axis Sensor' },
         { label: 'Elevation Profile', value: 'Altimeter Sync' },
         { label: 'Export Format', value: 'GPX / Telematics' }
-      ]
-    },
-    {
-      id: 'out-of-circle-ui',
-      title: 'Detour & Out-Of-Bounds Alert',
-      badge: 'Route Governance',
-      subtitle: 'Instant warning overlay when a rider strays from convoy',
-      description: 'Proactively identifies stragglers and wrong-turn detours before anyone gets lost. Visual red HUD overlay triggers automatically.',
-      src: outOfCircle,
-      isPro: true,
-      metrics: [
-        { label: 'Deviation Detect', value: 'Automatic' },
-        { label: 'Re-route Guidance', value: 'Instant Turn' },
-        { label: 'Squad Notice', value: 'Tail-End Alert' },
-        { label: 'Off-Route HUD', value: 'High Visibility' }
       ]
     }
   ];

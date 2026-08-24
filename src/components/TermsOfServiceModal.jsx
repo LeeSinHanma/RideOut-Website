@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-export default function PrivacyPolicyModal({ isOpen, onClose, onSwitchToTerms }) {
+export default function TermsOfServiceModal({ isOpen, onClose, onSwitchToPrivacy }) {
   const [searchTerm, setSearchTerm] = useState('');
   const [shouldRender, setShouldRender] = useState(false);
   const [animateIn, setAnimateIn] = useState(false);
@@ -32,16 +32,16 @@ export default function PrivacyPolicyModal({ isOpen, onClose, onSwitchToTerms })
   if (!shouldRender) return null;
 
   const handlePrint = () => {
-    const pdfUrl = '/RideOut_Privacy_Policy.pdf';
+    const pdfUrl = '/RideOut_Terms_of_Service.pdf';
     
-    // Create a hidden iframe to trigger browser print dialog on the PDF document directly
-    const existingIframe = document.getElementById('pdf-print-iframe');
+    // Create a hidden iframe to trigger browser print dialog directly
+    const existingIframe = document.getElementById('pdf-print-iframe-terms');
     if (existingIframe) {
       existingIframe.remove();
     }
 
     const iframe = document.createElement('iframe');
-    iframe.id = 'pdf-print-iframe';
+    iframe.id = 'pdf-print-iframe-terms';
     iframe.style.position = 'fixed';
     iframe.style.right = '0';
     iframe.style.bottom = '0';
@@ -86,7 +86,7 @@ export default function PrivacyPolicyModal({ isOpen, onClose, onSwitchToTerms })
           <div>
             <div className="flex items-center gap-3">
               <h2 className="text-lg font-bold text-white tracking-wide uppercase font-mono">
-                RideOut Privacy Policy
+                RideOut Terms of Service
               </h2>
               {/* Tab Switcher */}
               <div className="flex items-center gap-1 bg-[#1E293B] p-1 rounded-lg border border-[#334155]">
@@ -121,10 +121,10 @@ export default function PrivacyPolicyModal({ isOpen, onClose, onSwitchToTerms })
           <div className="flex items-center gap-2 flex-wrap sm:flex-nowrap">
             {/* Download PDF Button */}
             <a
-              href="/RideOut_Privacy_Policy.pdf"
+              href="/RideOut_Terms_of_Service.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              download="RideOut_Privacy_Policy.pdf"
+              download="RideOut_Terms_of_Service.pdf"
               className="px-3 py-1.5 rounded-lg bg-[#0EA5E9] text-white text-xs font-extrabold hover:bg-[#0284C7] transition-colors flex items-center gap-1.5 shadow"
               title="Download Complete PDF Document"
             >
@@ -132,14 +132,14 @@ export default function PrivacyPolicyModal({ isOpen, onClose, onSwitchToTerms })
               <span>Download PDF</span>
             </a>
 
-            {/* Jump to Terms Navigation Link */}
-            {onSwitchToTerms && (
+            {/* Jump to Privacy Policy Navigation Link */}
+            {onSwitchToPrivacy && (
               <button
-                onClick={onSwitchToTerms}
+                onClick={onSwitchToPrivacy}
                 className="px-3 py-1.5 rounded-lg bg-[#1E293B] border border-[#334155] text-xs font-bold text-[#00EEFC] hover:text-white hover:border-[#00EEFC] transition-colors flex items-center gap-1 shadow"
-                title="Switch to Terms of Service"
+                title="Switch to Privacy Policy"
               >
-                <span>Terms of Service</span>
+                <span>Privacy Policy</span>
                 <span className="material-symbols-outlined text-sm">arrow_forward</span>
               </button>
             )}
@@ -147,17 +147,18 @@ export default function PrivacyPolicyModal({ isOpen, onClose, onSwitchToTerms })
             {/* Print Button */}
             <button
               onClick={handlePrint}
-              className="px-3 py-1.5 rounded-lg bg-[#1E293B] border border-[#334155] text-[#BEC8D2] hover:text-white hover:border-[#0EA5E9] text-xs font-semibold flex items-center gap-1 transition-colors"
-              title="Print Document"
+              className="px-3 py-1.5 bg-[#1E293B] border border-[#334155] text-[#BEC8D2] hover:text-white hover:border-[#0EA5E9] rounded-lg text-xs font-semibold flex items-center gap-1 transition-colors"
+              title="Print Official Legal Document"
             >
               <span className="material-symbols-outlined text-sm">print</span>
               <span className="hidden sm:inline">Print</span>
             </button>
 
-            <button
+            {/* Close Button */}
+            <button 
               onClick={handleClose}
               className="p-1.5 text-[#88929B] hover:text-white hover:bg-[#1E293B] rounded-lg transition-colors"
-              aria-label="Close Privacy Policy"
+              aria-label="Close Terms of Service"
             >
               <span className="material-symbols-outlined text-xl">close</span>
             </button>
@@ -168,9 +169,9 @@ export default function PrivacyPolicyModal({ isOpen, onClose, onSwitchToTerms })
         {activeTab === 'pdf' ? (
           <div className="p-4 flex-1 flex flex-col bg-[#090D16] min-h-[500px]">
             <div className="bg-[#1E293B] p-3 rounded-xl border border-[#334155] mb-3 flex items-center justify-between text-xs text-[#89CEFF]">
-              <span className="font-mono">Official Document File: RideOut_Privacy_Policy.pdf</span>
+              <span className="font-mono">Official Document File: RideOut_Terms_of_Service.pdf</span>
               <a
-                href="/RideOut_Privacy_Policy.pdf"
+                href="/RideOut_Terms_of_Service.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-[#00EEFC] hover:underline font-bold flex items-center gap-1"
@@ -180,8 +181,8 @@ export default function PrivacyPolicyModal({ isOpen, onClose, onSwitchToTerms })
               </a>
             </div>
             <iframe
-              src="/RideOut_Privacy_Policy.pdf"
-              title="RideOut Official Privacy Policy PDF"
+              src="/RideOut_Terms_of_Service.pdf"
+              title="RideOut Official Terms of Service PDF"
               className="w-full flex-1 min-h-[480px] rounded-xl border border-[#334155] bg-white shadow-inner"
             />
           </div>
@@ -201,10 +202,10 @@ export default function PrivacyPolicyModal({ isOpen, onClose, onSwitchToTerms })
                 </div>
               </div>
               <a 
-                href="/RideOut_Privacy_Policy.pdf" 
+                href="/RideOut_Terms_of_Service.pdf" 
                 target="_blank"
                 rel="noopener noreferrer"
-                download="RideOut_Privacy_Policy.pdf"
+                download="RideOut_Terms_of_Service.pdf"
                 className="px-3.5 py-2 rounded-lg bg-[#0EA5E9] hover:bg-[#0284C7] text-white font-extrabold text-xs flex items-center gap-1.5 shrink-0 transition-colors shadow"
               >
                 <span className="material-symbols-outlined text-sm">download</span>
@@ -215,90 +216,107 @@ export default function PrivacyPolicyModal({ isOpen, onClose, onSwitchToTerms })
             {/* Formal Header Section */}
             <div className="border-b border-slate-800 pb-6">
               <h1 className="text-xl sm:text-2xl font-bold text-white mb-2">
-                PRIVACY POLICY OVERVIEW
+                TERMS OF SERVICE OVERVIEW
               </h1>
               <p className="text-xs text-slate-400 font-mono">
                 OFFICIAL LEGAL DOCUMENT — SAIKEN STUDIO (TAGUIG, PHILIPPINES)
               </p>
               <div className="mt-4 p-3 bg-slate-900/80 border border-slate-800 rounded-lg text-xs text-slate-300">
-                <strong className="text-white">LEGAL COMPLIANCE:</strong> Philippine Data Privacy Act of 2012 (RA 10173), EU GDPR, CCPA/CPRA, and Google Play / Apple App Store developer safety standards.
+                <strong className="text-white">NOTICE REGARDING OPERATING PLATFORMS:</strong> RideOut is currently released exclusively for the <strong>Android</strong> operating system via Google Play Store. References to iOS or Apple App Store are included for architectural context and future cross-platform deployment.
               </div>
             </div>
 
-            {/* Section 1: Introduction & Scope */}
+            {/* Section 1: Acceptance of Terms */}
             <section className="space-y-2">
               <h3 className="text-base font-bold text-white border-b border-slate-800 pb-1">
-                1. INTRODUCTION & SCOPE
+                1. ACCEPTANCE OF TERMS
               </h3>
               <p>
-                Welcome to <strong>RideOut</strong> ("we," "us," or "our"), operated by <strong>Saiken Studio</strong> (Taguig, Metro Manila, Philippines). RideOut is a real-time group location tracking, convoy communication, and ride session telemetry platform engineered for motorcycle, scooter, bicycle, and automobile riders.
+                Welcome to <strong>RideOut</strong> ("we," "us," "our," or the "Application"), owned and operated by <strong>Saiken Studio</strong>, located in Taguig, Republic of the Philippines.
               </p>
               <p>
-                This Privacy Policy governs the collection, processing, storage, transmission, protection, and deletion of personal and telemetry data when you access or use the <strong>RideOut</strong> mobile application (<code className="bg-slate-900 px-1 py-0.5 rounded text-sky-400">com.rideout.app</code>), official web interfaces, and cloud backends. By using the Application, you acknowledge and agree to the practices outlined in this policy.
+                These Terms of Service ("Terms") govern your access to and use of the RideOut mobile application, backend services, real-time location features, and related software applications (collectively, the "Services"). By downloading, installing, registering for, accessing, or using RideOut, you explicitly agree to be bound by these Terms and our Privacy Policy.
               </p>
             </section>
 
-            {/* Section 2: Data Controller */}
+            {/* Section 2: Eligibility & Account Creation */}
             <section className="space-y-2">
               <h3 className="text-base font-bold text-white border-b border-slate-800 pb-1">
-                2. DATA CONTROLLER & CONTACT INFORMATION
+                2. ELIGIBILITY & ACCOUNT CREATION
               </h3>
               <p>
-                Saiken Studio acts as the sole Data Controller for personal data processed through the RideOut application under the Philippine Data Privacy Act of 2012 (RA 10173) and global data protection regulations.
+                <strong>Minimum Age Requirement:</strong> You must be at least <strong>thirteen (13) years of age</strong> to access or use RideOut. RideOut provides two modes of access: Anonymous Guest Mode (temporary device session) and Registered Accounts (Google Sign-In or Email/Password with unique Rider Tag).
               </p>
-              <ul className="list-disc pl-5 space-y-1 text-slate-300">
-                <li><strong>Entity Name:</strong> Saiken Studio</li>
-                <li><strong>Operating Location:</strong> Taguig City, Metro Manila, Republic of the Philippines</li>
-                <li><strong>Data Protection Officer (DPO) / Legal Contact:</strong> <a href="mailto:saikenstudio.app@gmail.com" className="text-sky-400 hover:underline">saikenstudio.app@gmail.com</a></li>
-                <li><strong>Official Repository:</strong> <a href="https://github.com/LeeSinHanma/RideOut" target="_blank" rel="noopener noreferrer" className="text-sky-400 hover:underline">https://github.com/LeeSinHanma/RideOut</a></li>
-              </ul>
             </section>
 
-            {/* Section 3: Categories of Data Collected */}
+            {/* Section 3: Description of Service */}
             <section className="space-y-2">
               <h3 className="text-base font-bold text-white border-b border-slate-800 pb-1">
-                3. CATEGORIES OF DATA COLLECTED
+                3. DESCRIPTION OF SERVICE
               </h3>
               <p>
-                To provide real-time group tracking, convoy radio signals, and safety alerts, RideOut collects the following categories of data:
+                RideOut is a real-time group location tracking, convoy walkie-talkie communication, and ride session organizer designed for riders of motorcycles 🏍️, scooters 🛵, bicycles 🚲, and cars 🚗. Features include live telemetry map, 6-character room codes, hands-free convoy radio buttons, Emergency SOS beacons, and saved favorite places.
               </p>
-              <ul className="list-disc pl-5 space-y-1 text-slate-300">
-                <li><strong>Real-Time Location & GPS Telemetry:</strong> Latitude, longitude, altitude, heading degree, velocity, and timestamp telemetry transmitted during an active ride room session.</li>
-                <li><strong>Account & Profile Identifiers:</strong> Email address, Google account profile picture, display name, and unique Rider Tag (e.g. <code className="bg-slate-900 px-1 py-0.5 rounded text-sky-400">ALEX#8920</code>).</li>
-                <li><strong>Device Telemetry:</strong> Device model, OS version, battery level, network connection state, and anti-spoofing integrity flags (<code className="bg-slate-900 px-1 py-0.5 rounded text-sky-400">position.isMocked</code>).</li>
-                <li><strong>Convoy Intercom & Emergency SOS Signals:</strong> Intercom preset button triggers (Gas Stop ⛽, Hazard ⚠️, Regroup 🐢, Rest Stop ☕) and Emergency SOS beacon alerts.</li>
-                <li><strong>Saved Favorite Places:</strong> User-scoped private saved location pins (Home 🏠, Work 💼, Usual Spot 📍) stored under your account.</li>
-              </ul>
             </section>
 
-            {/* Section 4: Data Retention & Post-Session Wiping */}
+            {/* Section 4: Critical Disclaimer */}
             <section className="space-y-2">
-              <h3 className="text-base font-bold text-white border-b border-slate-800 pb-1">
-                4. DATA RETENTION & POST-SESSION LOCATION WIPING PROTOCOL
+              <h3 className="text-base font-bold text-amber-400 border-b border-slate-800 pb-1">
+                4. CRITICAL DISCLAIMER: NOT AN EMERGENCY SERVICE
               </h3>
-              <div className="p-4 bg-slate-900 border border-slate-800 rounded-xl space-y-2">
-                <p className="font-bold text-sky-400">
-                  🔒 POST-SESSION LOCATION WIPING PROTOCOL:
+              <div className="p-4 bg-amber-950/30 border border-amber-800/60 rounded-xl text-amber-200 text-xs space-y-2">
+                <p className="font-bold uppercase tracking-wider text-amber-400">
+                  ⚠️ RIDEOUT IS NOT A REPLACEMENT FOR EMERGENCY SERVICES (911 OR LOCAL EMERGENCY RESPONDERS).
                 </p>
-                <p className="text-xs">
-                  RideOut enforces strict data minimization. Live latitude and longitude coordinates transmitted during a ride room session are held in temporary memory exclusively for the duration of that active ride. When the session host ends the ride, raw GPS telemetry nodes (<code className="bg-[#0B1326] px-1 py-0.5 rounded text-sky-400">rides/$code/participants</code>) are <strong>automatically and permanently purged</strong> from Firebase Realtime Database within 24 hours.
+                <p>
+                  Emergency SOS and Mechanical Breakdown beacon features within RideOut function <strong>exclusively as peer-to-peer notifications within your active app session</strong>. Triggering an SOS alert notifies <strong>only fellow RideOut users connected to your active ride room</strong>. It does NOT contact municipal police, ambulance, or official 911 emergency call centers.
                 </p>
               </div>
             </section>
 
-            {/* Section 5: Account Deletion Request */}
-            <section className="space-y-2 border-t border-slate-800 pt-4">
-              <h3 className="text-base font-bold text-white">
-                5. ACCOUNT DELETION & YOUR DATA RIGHTS
+            {/* Section 5: Safe Use & Distracted Driving Laws */}
+            <section className="space-y-2">
+              <h3 className="text-base font-bold text-white border-b border-slate-800 pb-1">
+                5. SAFE USE & DISTRACTED DRIVING LAWS
               </h3>
               <p>
-                You have the right to request complete access to, correction of, or permanent deletion of your account data under the Philippine Data Privacy Act of 2012 (RA 10173) and GDPR.
+                You must operate your vehicle safely and in strict compliance with traffic laws, including the <strong>Anti-Distracted Driving Act of 2016 (Republic Act No. 10913)</strong> in the Philippines. You must <strong>NEVER</strong> physically interact with your mobile device screen while actively driving or riding a moving vehicle.
               </p>
-              <div className="p-4 bg-slate-900 border border-slate-800 rounded-xl space-y-1 text-xs">
-                <strong className="text-white block">Account Deletion Request Procedure:</strong>
-                <div>1. Email: <a href="mailto:saikenstudio.app@gmail.com?subject=Account%20Deletion%20Request%20-%20RideOut" className="text-sky-400 underline font-mono">saikenstudio.app@gmail.com</a></div>
-                <div>2. Subject Line: <code className="text-sky-400">Account Deletion Request - RideOut</code></div>
-                <div>3. Fulfillment: Account profile, saved places, and ride history records will be permanently purged within thirty (30) calendar days.</div>
+            </section>
+
+            {/* Section 6: Subscriptions & Payments */}
+            <section className="space-y-2">
+              <h3 className="text-base font-bold text-white border-b border-slate-800 pb-1">
+                6. SUBSCRIPTIONS & RIDEOUT PRO
+              </h3>
+              <p>
+                RideOut offers an optional premium subscription tier (<strong>RideOut PRO</strong>). All subscription payments are processed exclusively through <strong>Google Play Store In-App Billing</strong> (<code className="bg-slate-900 px-1 py-0.5 rounded text-sky-400">in_app_purchase</code>). Subscriptions auto-renew unless canceled at least 24 hours prior to current billing period expiration in Google Play Store settings.
+              </p>
+            </section>
+
+            {/* Section 7: Governing Law */}
+            <section className="space-y-2">
+              <h3 className="text-base font-bold text-white border-b border-slate-800 pb-1">
+                7. GOVERNING LAW & JURISDICTION
+              </h3>
+              <p>
+                These Terms shall be governed by and construed in accordance with the laws of the <strong>Republic of the Philippines</strong>. Any legal proceedings shall be instituted exclusively in the competent courts of <strong>Taguig City, Metro Manila, Philippines</strong>.
+              </p>
+            </section>
+
+            {/* Section 8: Contact & Deletion */}
+            <section className="space-y-2 border-t border-slate-800 pt-4">
+              <h3 className="text-base font-bold text-white">
+                8. ACCOUNT DELETION & CONTACT INFORMATION
+              </h3>
+              <p>
+                To request permanent deletion of your user account, rider profile, and stored ride history, send an email to <a href="mailto:saikenstudio.app@gmail.com?subject=Account%20Deletion%20Request%20-%20RideOut" className="text-sky-400 hover:underline">saikenstudio.app@gmail.com</a> with the subject line <strong>"Account Deletion Request - RideOut"</strong>.
+              </p>
+              <div className="mt-4 p-4 bg-slate-900 rounded-xl border border-slate-800 text-xs font-mono text-slate-400 space-y-1">
+                <div>Developer: Saiken Studio</div>
+                <div>Location: Taguig, Republic of the Philippines</div>
+                <div>Contact Email: saikenstudio.app@gmail.com</div>
+                <div>Repository: https://github.com/LeeSinHanma/RideOut</div>
               </div>
             </section>
 
@@ -309,22 +327,22 @@ export default function PrivacyPolicyModal({ isOpen, onClose, onSwitchToTerms })
         <div className="px-6 py-4 bg-[#060E20] border-t border-[#334155] flex flex-col sm:flex-row sm:items-center justify-between gap-3 shrink-0 text-xs text-[#88929B]">
           <div className="flex items-center gap-3 flex-wrap">
             <span>© 2026 Saiken Studio. All rights reserved.</span>
-            {onSwitchToTerms && (
+            {onSwitchToPrivacy && (
               <button
-                onClick={onSwitchToTerms}
+                onClick={onSwitchToPrivacy}
                 className="text-[#00EEFC] hover:underline font-semibold flex items-center gap-1"
               >
-                <span>View Terms of Service</span>
+                <span>View Privacy Policy</span>
                 <span className="material-symbols-outlined text-xs">arrow_forward</span>
               </button>
             )}
           </div>
           <div className="flex items-center gap-2">
             <a
-              href="/RideOut_Privacy_Policy.pdf"
+              href="/RideOut_Terms_of_Service.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              download="RideOut_Privacy_Policy.pdf"
+              download="RideOut_Terms_of_Service.pdf"
               className="px-3 py-2 rounded-xl bg-[#1E293B] border border-[#334155] text-[#89CEFF] hover:text-white font-bold text-xs transition-colors flex items-center gap-1"
             >
               <span className="material-symbols-outlined text-sm">download</span>
