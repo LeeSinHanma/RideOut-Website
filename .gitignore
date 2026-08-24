@@ -9,6 +9,7 @@ build
 .vite
 .cache
 *.tsbuildinfo
+.vercel
 
 # Environment variables & secrets
 .env
@@ -17,6 +18,7 @@ build
 .env.test.local
 .env.production.local
 !.env.example
+*.pem
 
 # Logs & Debug
 logs
@@ -44,6 +46,7 @@ coverage
 *.njsproj
 *.sln
 *.sw?
+.gemini
 
 # OS & System files
 .DS_Store
@@ -57,4 +60,3 @@ Thumbs.db
 # Temporary files
 *.tmp
 *.temp
-

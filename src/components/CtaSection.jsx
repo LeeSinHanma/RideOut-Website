@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import { Button } from '@heroui/react';
 import readyWholeBody from '../assets/readyWholeBody.png';
 
@@ -19,38 +19,29 @@ export default function CtaSection({ onDownloadClick }) {
           />
         </div>
 
+        {/* Section Headline */}
         <div className="space-y-4">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#00EEFC]/10 border border-[#00EEFC]/40 text-[#00EEFC] font-extrabold text-xs uppercase tracking-wider shadow">
+            <span className="w-2 h-2 rounded-full bg-[#00EEFC] animate-ping" />
+            Closed Testing Phase Active
+          </div>
           <h2 className="text-3xl md:text-5xl font-black text-white tracking-tight">
             Ready to Ride?
           </h2>
-          <p className="text-base md:text-xl text-[#BEC8D2] font-medium max-w-xl mx-auto">
-            Download RideOut today and ensure you never leave a rider behind on your next pack adventure.
+          <p className="text-base md:text-xl text-[#BEC8D2] font-medium max-w-xl mx-auto leading-relaxed">
+            Apply for closed testing access today and ensure you never leave a rider behind on your next pack adventure.
           </p>
         </div>
 
-        {/* QR Code Scan Card (Glows on Hover) */}
-        <div className="bg-[#1E293B] border border-[#334155] p-5 rounded-3xl shadow-2xl flex flex-col items-center gap-3 transition-all duration-300 hover:border-[#0EA5E9]/60 hover:shadow-[0_0_30px_rgba(14,165,233,0.3)]">
-          <div className="bg-white p-3 rounded-2xl shadow-inner">
-            <img 
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuCLSPRWwqsW7NPbhDybvfNCEXygXy4vMcjahj-X330R8EuxrMRvOKtQiA1NKAGVpZJPyIMoIrWj5Sikob3ZtM2MsPBgwkKNdLUyhsOGBNCX7AOow-d7oi8UwTxSUyznNw2diD7osYwupbhianielmUCwAOXSqBWANd4IBi52Ot5xX1GUZJvk1Sr15bTMjIsKa-0RSkReAvZYKGyNSxGbXAu297p1whZRT7iPWt8OdJ9i3VPpXfaADj1" 
-              alt="Scan to Download QR Code" 
-              className="w-36 h-36 object-contain"
-            />
-          </div>
-          <span className="text-xs font-bold text-[#89CEFF] tracking-wide">
-            SCAN QR WITH YOUR PHONE
-          </span>
-        </div>
-
-        {/* CTA Button Hierarchy: Android Highlighted as Primary, iOS Muted as Secondary */}
-        <div className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto">
-          {/* Primary Highlighted Android Button */}
+        {/* CTA Button Hierarchy: Primary Join Testing Button & Secondary iOS Button */}
+        <div className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto mt-2">
+          {/* Primary Highlighted Join Testing Button */}
           <Button
             onPress={onDownloadClick}
             className="w-full sm:w-auto bg-gradient-to-r from-[#0EA5E9] to-[#00EEFC] hover:from-[#0284C7] hover:to-[#0EA5E9] text-white font-extrabold text-base px-8 py-4 rounded-xl transition-all duration-300 hover:shadow-[0_0_30px_rgba(14,165,233,0.5)] active:scale-95 flex items-center justify-center gap-3 shadow-lg"
           >
-            <span className="material-symbols-outlined text-xl">android</span>
-            Download Android App
+            <span className="material-symbols-outlined text-xl">assignment</span>
+            Join Testing Today!
           </Button>
 
           {/* Secondary Muted iOS Button */}
