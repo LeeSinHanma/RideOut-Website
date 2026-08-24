@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React, { useState, useEffect } from 'react';
 import mapUI from '../assets/mapUI.jpg';
 import outOfCircle from '../assets/outOfCircle.jpg';
 import radio from '../assets/radio.jpg';
@@ -8,111 +8,567 @@ import withinCircle from '../assets/withinCircle.jpg';
 import advancedTelemetry from '../assets/advancedTelemetry.png';
 
 export default function ShowcaseGallery() {
+  const [activeIdx, setActiveIdx] = useState(0);
+  const [viewMode, setViewMode] = useState('spotlight'); // 'spotlight' | 'grid'
+  const [isAutoplay, setIsAutoplay] = useState(true);
+  const [lightboxItem, setLightboxItem] = useState(null);
+
   const galleryItems = [
     {
+      id: 'map-ui',
       title: 'Live Telemetry Map',
+      badge: 'GPS Radar',
       subtitle: 'High-contrast day & night GPS radar layout',
+      description: 'Engineered specifically for high-speed riding visibility under glare or night conditions. Continuously updates all rider coordinates on a vector map.',
       src: mapUI,
-      badge: 'GPS Radar'
+      isPro: false,
+      metrics: [
+        { label: 'GPS Precision', value: '< 2 meters' },
+        { label: 'Map Refresh', value: '60 Hz Vector' },
+        { label: 'Sunlight Visibility', value: 'High Contrast' },
+        { label: 'Tracking Mode', value: 'Real-Time' }
+      ]
     },
     {
+      id: 'rider-ui',
       title: 'Pack Roster HUD',
+      badge: 'Pack Roster',
       subtitle: 'Real-time rider status, battery & connection tracker',
+      description: 'Keep tabs on every squad member at a glance. Monitors individual velocity, battery percentage, and signal strength so nobody gets left behind.',
       src: riderUI,
-      badge: 'Pack Roster'
+      isPro: false,
+      metrics: [
+        { label: 'Squad Capacity', value: 'Up to 50' },
+        { label: 'Telemetry Metrics', value: 'Speed & Battery' },
+        { label: 'Connection Watch', value: 'Live Heartbeat' },
+        { label: 'Rider Status', value: 'Active Pack' }
+      ]
     },
     {
+      id: 'radio-ui',
       title: 'Convoy Radio Signals',
+      badge: 'Glove Radio',
       subtitle: '1-tap glove-friendly presets for gas, hazards & regroup',
+      description: 'No fiddling with small buttons while wearing heavy riding gloves. Instant 1-tap audio alerts for quick team callouts on the fly.',
       src: radio,
-      badge: 'Glove Radio'
+      isPro: false,
+      metrics: [
+        { label: 'Touch Target', value: 'Glove-Friendly' },
+        { label: 'Callout Presets', value: 'Gas / Hazard / Stop' },
+        { label: 'Audio Latency', value: '< 50 ms' },
+        { label: 'Hands-Free', value: 'BLE Helmet Ready' }
+      ]
     },
     {
+      id: 'sos-ui',
       title: 'Emergency SOS Beacon',
+      badge: 'SOS Safety',
       subtitle: 'Instant broadcast safety alert to all squad members',
+      description: 'One emergency trigger broadcasts high-priority audio alerts and precise GPS pin coordinates to all squad members and emergency contacts instantly.',
       src: SOS,
-      badge: 'SOS Safety'
+      isPro: false,
+      metrics: [
+        { label: 'Dispatch Speed', value: 'Instant (< 1s)' },
+        { label: 'Coordinates', value: 'Lat/Long Pin' },
+        { label: 'Override Mode', value: 'Loud Beacon' },
+        { label: 'Fallback', value: 'SMS Gateway' }
+      ]
     },
     {
+      id: 'geofence-ui',
       title: 'Geofence Safe Zone',
+      badge: 'Pack Geofence',
       subtitle: 'Dynamic green ring keeping the pack together',
+      description: 'Creates a dynamic safety perimeter around the convoy lead rider. Automatically notifies riders when they stray beyond the pack safety zone.',
       src: withinCircle,
-      badge: 'Pack Geofence'
+      isPro: false,
+      metrics: [
+        { label: 'Radius Control', value: 'Dynamic / Custom' },
+        { label: 'Auto Calculation', value: 'Lead Anchor' },
+        { label: 'Alert Audio', value: 'Chime & Vibration' },
+        { label: 'Pack Radius', value: '500m - 5km' }
+      ]
     },
     {
+      id: 'telemetry-ui',
       title: 'Advanced Telemetry Analytics',
-      subtitle: 'Velocity profiles, G-force, lean angle & elevation metrics',
-      src: advancedTelemetry,
       badge: 'PRO Telematics',
-      isPro: true
+      subtitle: 'Velocity profiles, G-force, lean angle & elevation metrics',
+      description: 'Unlock professional racing telematics right on your phone. Record lean angle degrees, corner acceleration, and high-altitude ride telemetry.',
+      src: advancedTelemetry,
+      isPro: true,
+      metrics: [
+        { label: 'Lean Angle Sensors', value: 'IMU Fusion' },
+        { label: 'G-Force Tracking', value: '3-Axis Sensor' },
+        { label: 'Elevation Profile', value: 'Altimeter Sync' },
+        { label: 'Export Format', value: 'GPX / Telematics' }
+      ]
     },
     {
+      id: 'out-of-circle-ui',
       title: 'Detour & Out-Of-Bounds Alert',
-      subtitle: 'Instant warning overlay when a rider strays from convoy',
-      src: outOfCircle,
       badge: 'Route Governance',
-      isPro: true
+      subtitle: 'Instant warning overlay when a rider strays from convoy',
+      description: 'Proactively identifies stragglers and wrong-turn detours before anyone gets lost. Visual red HUD overlay triggers automatically.',
+      src: outOfCircle,
+      isPro: true,
+      metrics: [
+        { label: 'Deviation Detect', value: 'Automatic' },
+        { label: 'Re-route Guidance', value: 'Instant Turn' },
+        { label: 'Squad Notice', value: 'Tail-End Alert' },
+        { label: 'Off-Route HUD', value: 'High Visibility' }
+      ]
     }
   ];
 
-  return (
-    <section id="showcase" className="py-24 px-5 bg-[#060E20] border-t border-[#334155]">
-      <div className="max-w-7xl mx-auto space-y-16">
-        <div className="text-center max-w-2xl mx-auto space-y-4">
-          <span className="px-4 py-1.5 rounded-full bg-[#00EEFC]/10 border border-[#00EEFC]/30 text-[#00EEFC] font-black text-xs uppercase tracking-wider">
-            UI Showcase
-          </span>
-          <h2 className="text-3xl md:text-5xl font-black text-white">
-            See It In Action
-          </h2>
-          <p className="text-base md:text-lg text-[#BEC8D2] font-medium">
-            Designed for ultra-clear legibility under direct sunlight or late night highway rides.
-          </p>
-        </div>
+  const currentItem = galleryItems[activeIdx];
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {galleryItems.map((item, idx) => (
-            <div
-              key={idx}
-              className={`bg-[#1E293B] rounded-2xl border overflow-hidden flex flex-col group transition-all duration-300 shadow-lg ${
-                item.isPro 
-                  ? 'border-[#8B5CF6]/50 hover:border-[#0EA5E9] hover:shadow-[0_0_30px_rgba(139,92,246,0.3)]' 
-                  : 'border-[#334155] hover:border-[#0EA5E9]/50 hover:shadow-[0_0_25px_rgba(14,165,233,0.15)]'
+  // Auto-play slideshow for spotlight view
+  useEffect(() => {
+    if (!isAutoplay || viewMode !== 'spotlight' || lightboxItem !== null) return;
+    const timer = setInterval(() => {
+      setActiveIdx((prev) => (prev + 1) % galleryItems.length);
+    }, 4500);
+    return () => clearInterval(timer);
+  }, [isAutoplay, viewMode, lightboxItem, galleryItems.length]);
+
+  const handleNext = () => {
+    setActiveIdx((prev) => (prev + 1) % galleryItems.length);
+  };
+
+  const handlePrev = () => {
+    setActiveIdx((prev) => (prev - 1 + galleryItems.length) % galleryItems.length);
+  };
+
+  return (
+    <section id="showcase" className="py-24 px-4 sm:px-6 bg-[#060E20] border-t border-[#334155]/60 relative overflow-hidden">
+      {/* Background Ambient Glow FX */}
+      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-tr from-[#0EA5E9]/10 via-[#00EEFC]/5 to-[#8B5CF6]/10 rounded-full blur-[140px] pointer-events-none" />
+
+      <div className="max-w-7xl mx-auto space-y-12 relative z-10">
+        {/* Section Title & View Switcher */}
+        <div className="flex flex-col md:flex-row items-center justify-between gap-6 pb-4 border-b border-[#334155]/40">
+          <div className="text-center md:text-left space-y-3 max-w-2xl">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#00EEFC]/10 border border-[#00EEFC]/30 text-[#00EEFC] font-black text-xs uppercase tracking-wider">
+              <span className="material-symbols-outlined text-sm">smartphone</span>
+              Interactive UI Showcase
+            </div>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-white tracking-tight">
+              Designed for the Helmet HUD & Direct Sunlight
+            </h2>
+            <p className="text-base sm:text-lg text-[#BEC8D2] font-medium leading-relaxed">
+              Explore RideOut's rider-centric interface designed specifically for glove navigation and high-speed clarity.
+            </p>
+          </div>
+
+          {/* View Mode Switcher Controls */}
+          <div className="flex items-center gap-1.5 p-1.5 rounded-2xl bg-[#0F172A] border border-[#334155] shadow-inner">
+            <button
+              onClick={() => setViewMode('spotlight')}
+              className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all duration-300 ${
+                viewMode === 'spotlight'
+                  ? 'bg-gradient-to-r from-[#0EA5E9] to-[#00EEFC] text-white shadow-[0_0_15px_rgba(14,165,233,0.4)]'
+                  : 'text-[#89CEFF] hover:text-white hover:bg-[#1E293B]'
               }`}
             >
-              <div className="bg-[#0F172A] p-2 relative overflow-hidden flex items-center justify-center min-h-[320px] max-h-[460px]">
-                <img
-                  src={item.src}
-                  alt={item.title}
-                  className="w-full h-auto max-h-[440px] object-contain rounded-xl border border-[#334155] group-hover:scale-[1.02] transition-transform duration-500"
-                />
-                <span className={`absolute top-4 left-4 backdrop-blur-sm text-[10px] font-black px-2.5 py-1 rounded-md uppercase tracking-wider ${
-                  item.isPro 
-                    ? 'bg-[#8B5CF6] text-white border border-[#A855F7] shadow-[0_0_12px_rgba(139,92,246,0.5)]' 
-                    : 'bg-[#0F172A]/90 text-[#89CEFF] border border-[#0EA5E9]/30'
-                }`}>
-                  {item.badge}
-                </span>
-              </div>
-              <div className="p-5 flex flex-col gap-1">
-                <div className="flex items-center justify-between">
-                  <h4 className="text-lg font-black text-white group-hover:text-[#0EA5E9] transition-colors">
-                    {item.title}
-                  </h4>
-                  {item.isPro && (
-                    <span className="bg-gradient-to-r from-[#8B5CF6] to-[#0EA5E9] text-white text-[10px] font-black px-2 py-0.5 rounded-md uppercase tracking-wider shadow-md">
-                      PRO
+              <span className="material-symbols-outlined text-base">phone_iphone</span>
+              Spotlight Hub
+            </button>
+            <button
+              onClick={() => setViewMode('grid')}
+              className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all duration-300 ${
+                viewMode === 'grid'
+                  ? 'bg-gradient-to-r from-[#0EA5E9] to-[#00EEFC] text-white shadow-[0_0_15px_rgba(14,165,233,0.4)]'
+                  : 'text-[#89CEFF] hover:text-white hover:bg-[#1E293B]'
+              }`}
+            >
+              <span className="material-symbols-outlined text-base">grid_view</span>
+              Gallery Grid
+            </button>
+          </div>
+        </div>
+
+        {/* ---------------------------------------------------- */}
+        {/* SPOTLIGHT HUB MODE */}
+        {/* ---------------------------------------------------- */}
+        {viewMode === 'spotlight' && (
+          <div className="space-y-8">
+            {/* Feature Tabs Quick Selector Bar */}
+            <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none">
+              {galleryItems.map((item, idx) => {
+                const isActive = idx === activeIdx;
+                return (
+                  <button
+                    key={item.id}
+                    onClick={() => {
+                      setActiveIdx(idx);
+                      setIsAutoplay(false);
+                    }}
+                    className={`whitespace-nowrap px-4 py-2.5 rounded-xl text-xs font-extrabold transition-all duration-300 flex items-center gap-2 border ${
+                      isActive
+                        ? item.isPro
+                          ? 'bg-[#8B5CF6]/20 border-[#8B5CF6] text-white shadow-[0_0_20px_rgba(139,92,246,0.35)]'
+                          : 'bg-[#0EA5E9]/20 border-[#00EEFC] text-white shadow-[0_0_20px_rgba(0,238,252,0.3)]'
+                        : 'bg-[#0F172A]/80 border-[#334155]/60 text-[#BEC8D2] hover:border-[#0EA5E9]/40 hover:text-white'
+                    }`}
+                  >
+                    <span
+                      className={`w-2 h-2 rounded-full ${
+                        isActive
+                          ? item.isPro
+                            ? 'bg-[#A855F7] animate-ping'
+                            : 'bg-[#00EEFC] animate-ping'
+                          : 'bg-[#334155]'
+                      }`}
+                    />
+                    {item.badge}
+                    {item.isPro && (
+                      <span className="bg-[#8B5CF6] text-white text-[9px] font-black px-1.5 py-0.5 rounded uppercase">
+                        PRO
+                      </span>
+                    )}
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Main Interactive Stage: 3-Column Desktop Grid (Details | Smartphone Frame | Quick Selector List) */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-[#0F172A]/90 p-6 sm:p-8 rounded-3xl border border-[#334155]/80 backdrop-blur-xl shadow-2xl min-h-[560px]">
+              
+              {/* Left Column: Feature Details & Specs (5 Cols) */}
+              <div className="lg:col-span-5 space-y-6 flex flex-col justify-between h-full">
+                <div className="space-y-6">
+                  <div className="flex items-center gap-3">
+                    <span
+                      className={`px-3 py-1 rounded-md text-xs font-black uppercase tracking-wider border ${
+                        currentItem.isPro
+                          ? 'bg-[#8B5CF6]/20 border-[#8B5CF6] text-[#C084FC]'
+                          : 'bg-[#0EA5E9]/20 border-[#0EA5E9]/50 text-[#00EEFC]'
+                      }`}
+                    >
+                      {currentItem.badge}
                     </span>
-                  )}
+                    {currentItem.isPro && (
+                      <span className="bg-gradient-to-r from-[#8B5CF6] to-[#0EA5E9] text-white text-xs font-black px-2.5 py-0.5 rounded-md uppercase shadow">
+                        PRO Feature
+                      </span>
+                    )}
+                  </div>
+
+                  <div className="space-y-2">
+                    <h3 className="text-2xl sm:text-3xl font-black text-white leading-tight">
+                      {currentItem.title}
+                    </h3>
+                    <p className="text-sm font-semibold text-[#89CEFF]">
+                      {currentItem.subtitle}
+                    </p>
+                  </div>
+
+                  <p className="text-sm text-[#BEC8D2] font-medium leading-relaxed min-h-[60px]">
+                    {currentItem.description}
+                  </p>
+
+                  {/* Key Metrics Chips */}
+                  <div className="grid grid-cols-2 gap-3 pt-2">
+                    {currentItem.metrics.map((m, i) => (
+                      <div
+                        key={i}
+                        className="bg-[#1E293B]/80 p-3 rounded-xl border border-[#334155]/70 flex flex-col gap-0.5"
+                      >
+                        <span className="text-[10px] font-bold text-[#64748B] uppercase tracking-wider">
+                          {m.label}
+                        </span>
+                        <span className="text-xs font-black text-white">
+                          {m.value}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
-                <p className="text-xs text-[#BEC8D2] font-medium">
-                  {item.subtitle}
+
+                {/* Stage Controls */}
+                <div className="pt-4 flex items-center justify-between border-t border-[#334155]/60">
+                  <div className="flex items-center gap-2">
+                    <button
+                      onClick={handlePrev}
+                      className="p-2.5 rounded-xl bg-[#1E293B] border border-[#334155] text-white hover:border-[#0EA5E9] hover:bg-[#0EA5E9]/20 transition-all active:scale-95"
+                      title="Previous Screen"
+                    >
+                      <span className="material-symbols-outlined text-lg">arrow_back</span>
+                    </button>
+                    <button
+                      onClick={handleNext}
+                      className="p-2.5 rounded-xl bg-[#1E293B] border border-[#334155] text-white hover:border-[#0EA5E9] hover:bg-[#0EA5E9]/20 transition-all active:scale-95"
+                      title="Next Screen"
+                    >
+                      <span className="material-symbols-outlined text-lg">arrow_forward</span>
+                    </button>
+                    <button
+                      onClick={() => setIsAutoplay(!isAutoplay)}
+                      className={`px-3 py-2 rounded-xl border text-xs font-extrabold flex items-center gap-1.5 transition-all ${
+                        isAutoplay
+                          ? 'bg-[#10B981]/20 border-[#10B981]/50 text-[#10B981]'
+                          : 'bg-[#1E293B] border-[#334155] text-[#88929B]'
+                      }`}
+                    >
+                      <span className="material-symbols-outlined text-sm">
+                        {isAutoplay ? 'pause_circle' : 'play_circle'}
+                      </span>
+                      {isAutoplay ? 'Autoplay On' : 'Paused'}
+                    </button>
+                  </div>
+
+                  <button
+                    onClick={() => setLightboxItem(currentItem)}
+                    className="px-3.5 py-2 rounded-xl bg-[#0EA5E9]/10 border border-[#0EA5E9]/40 text-[#00EEFC] hover:bg-[#0EA5E9] hover:text-white transition-all text-xs font-bold flex items-center gap-1.5"
+                  >
+                    <span className="material-symbols-outlined text-sm">zoom_in</span>
+                    Expand Screen
+                  </button>
+                </div>
+              </div>
+
+              {/* Center Column: Realistic Mobile Phone Mockup (4 Cols) */}
+              <div className="lg:col-span-4 flex items-center justify-center relative py-4">
+                {/* Dynamic Screen Aura Glow */}
+                <div
+                  className={`absolute -inset-4 rounded-[48px] blur-2xl transition-all duration-700 pointer-events-none ${
+                    currentItem.isPro
+                      ? 'bg-[#8B5CF6]/30'
+                      : 'bg-[#0EA5E9]/25'
+                  }`}
+                />
+
+                {/* Smartphone Device Body (Uniform Fixed Height) */}
+                <div className="relative w-full max-w-[310px] h-[510px] rounded-[42px] border-4 border-[#334155] bg-[#090D16] p-3 shadow-2xl transition-all duration-500 hover:border-[#0EA5E9]/80 group flex flex-col">
+                  {/* Speaker & Dynamic Island Notch */}
+                  <div className="absolute top-4 left-1/2 -translate-x-1/2 w-28 h-4 bg-[#090D16] border border-[#1E293B] rounded-b-xl z-30 flex items-center justify-center">
+                    <span className="w-3 h-3 rounded-full bg-[#030712] border border-[#334155]" />
+                  </div>
+
+                  {/* Mobile Screen Container */}
+                  <div className="relative w-full h-full rounded-[30px] overflow-hidden bg-[#060E20] border border-[#1E293B] flex flex-col">
+                    {/* Simulated OS Top Bar */}
+                    <div className="flex items-center justify-between px-5 pt-3 pb-1 text-[10px] text-[#89CEFF] font-mono border-b border-[#334155]/40 bg-[#0F172A]/80 relative z-20 shrink-0">
+                      <span>09:41</span>
+                      <div className="flex items-center gap-1.5">
+                        <span className="material-symbols-outlined text-[12px]">signal_cellular_alt</span>
+                        <span className="material-symbols-outlined text-[12px]">wifi</span>
+                        <span className="material-symbols-outlined text-[12px]">battery_full</span>
+                      </div>
+                    </div>
+
+                    {/* Screenshot View Area (Strict Uniform Height h-[440px]) */}
+                    <div 
+                      onClick={() => setLightboxItem(currentItem)}
+                      className="relative h-[440px] w-full flex items-center justify-center bg-black cursor-pointer overflow-hidden group/img shrink-0"
+                    >
+                      <img
+                        key={currentItem.id}
+                        src={currentItem.src}
+                        alt={currentItem.title}
+                        className="w-full h-full object-contain transition-all duration-500 group-hover/img:scale-105"
+                      />
+
+                      {/* Click to Zoom Hover Overlay */}
+                      <div className="absolute inset-0 bg-black/40 opacity-0 group-hover/img:opacity-100 transition-opacity flex flex-col items-center justify-center text-white gap-1 backdrop-blur-[2px]">
+                        <span className="material-symbols-outlined text-3xl text-[#00EEFC]">zoom_in</span>
+                        <span className="text-xs font-black uppercase tracking-wider">Click to Zoom</span>
+                      </div>
+
+                      {/* Live Screen Watermark Indicator */}
+                      <div className="absolute bottom-3 left-3 bg-[#0F172A]/90 backdrop-blur-md px-2.5 py-1 rounded-full border border-[#0EA5E9]/40 text-[10px] font-bold text-[#00EEFC] flex items-center gap-1.5">
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#10B981] animate-pulse" />
+                        Screen {activeIdx + 1} of {galleryItems.length}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Right Column: Quick Feature List Selector (3 Cols) */}
+              <div className="lg:col-span-3 space-y-2.5 h-full flex flex-col justify-center">
+                <h4 className="text-xs font-black text-[#89CEFF] uppercase tracking-wider mb-2">
+                  All App Screens
+                </h4>
+                <div className="space-y-2 max-h-[440px] overflow-y-auto pr-2">
+                  {galleryItems.map((item, idx) => {
+                    const isSelected = idx === activeIdx;
+                    return (
+                      <div
+                        key={item.id}
+                        onClick={() => {
+                          setActiveIdx(idx);
+                          setIsAutoplay(false);
+                        }}
+                        className={`p-3 rounded-2xl border transition-all cursor-pointer flex items-center gap-3 ${
+                          isSelected
+                            ? item.isPro
+                              ? 'bg-[#8B5CF6]/20 border-[#8B5CF6] text-white shadow-md'
+                              : 'bg-[#0EA5E9]/20 border-[#00EEFC] text-white shadow-md'
+                            : 'bg-[#1E293B]/60 border-[#334155]/40 text-[#BEC8D2] hover:bg-[#1E293B] hover:text-white'
+                        }`}
+                      >
+                        <div className="w-10 h-10 rounded-xl overflow-hidden bg-[#0F172A] border border-[#334155] shrink-0">
+                          <img
+                            src={item.src}
+                            alt={item.title}
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
+                        <div className="flex flex-col min-w-0 flex-1">
+                          <div className="flex items-center justify-between">
+                            <span className="text-xs font-bold truncate">
+                              {item.title}
+                            </span>
+                            {item.isPro && (
+                              <span className="text-[8px] font-black bg-[#8B5CF6] text-white px-1 rounded uppercase">
+                                PRO
+                              </span>
+                            )}
+                          </div>
+                          <span className="text-[10px] text-[#64748B] font-medium truncate">
+                            {item.badge}
+                          </span>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+
+            </div>
+          </div>
+        )}
+
+        {/* ---------------------------------------------------- */}
+        {/* GALLERY GRID MODE */}
+        {/* ---------------------------------------------------- */}
+        {viewMode === 'grid' && (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {galleryItems.map((item, idx) => (
+              <div
+                key={item.id}
+                onClick={() => setLightboxItem(item)}
+                className={`bg-[#0F172A] rounded-2xl border overflow-hidden flex flex-col group transition-all duration-300 cursor-pointer shadow-xl ${
+                  item.isPro
+                    ? 'border-[#8B5CF6]/40 hover:border-[#8B5CF6] hover:shadow-[0_0_30px_rgba(139,92,246,0.3)]'
+                    : 'border-[#334155] hover:border-[#00EEFC]/60 hover:shadow-[0_0_25px_rgba(0,238,252,0.2)]'
+                }`}
+              >
+                {/* Screenshot Frame */}
+                <div className="bg-[#060E20] p-4 relative overflow-hidden flex items-center justify-center min-h-[300px] max-h-[420px] group/card">
+                  <img
+                    src={item.src}
+                    alt={item.title}
+                    className="w-full h-auto max-h-[380px] object-contain rounded-xl border border-[#334155] group-hover/card:scale-105 transition-transform duration-500"
+                  />
+
+                  {/* Badge */}
+                  <span
+                    className={`absolute top-4 left-4 backdrop-blur-md text-[10px] font-black px-2.5 py-1 rounded-md uppercase tracking-wider ${
+                      item.isPro
+                        ? 'bg-[#8B5CF6] text-white border border-[#A855F7]'
+                        : 'bg-[#0F172A]/90 text-[#00EEFC] border border-[#0EA5E9]/40'
+                    }`}
+                  >
+                    {item.badge}
+                  </span>
+
+                  {/* Zoom Overlay */}
+                  <div className="absolute inset-0 bg-black/40 opacity-0 group-hover/card:opacity-100 transition-opacity flex items-center justify-center text-white">
+                    <span className="material-symbols-outlined text-3xl text-[#00EEFC]">zoom_in</span>
+                  </div>
+                </div>
+
+                {/* Info Area */}
+                <div className="p-5 flex flex-col gap-1.5 bg-[#1E293B]/60">
+                  <div className="flex items-center justify-between">
+                    <h4 className="text-base font-black text-white group-hover:text-[#00EEFC] transition-colors">
+                      {item.title}
+                    </h4>
+                    {item.isPro && (
+                      <span className="bg-gradient-to-r from-[#8B5CF6] to-[#0EA5E9] text-white text-[9px] font-black px-2 py-0.5 rounded uppercase">
+                        PRO
+                      </span>
+                    )}
+                  </div>
+                  <p className="text-xs text-[#BEC8D2] font-medium leading-normal">
+                    {item.subtitle}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* ---------------------------------------------------- */}
+        {/* FULL RESOLUTION LIGHTBOX MODAL */}
+        {/* ---------------------------------------------------- */}
+        {lightboxItem && (
+          <div
+            className="fixed inset-0 z-50 bg-black/90 backdrop-blur-xl flex items-center justify-center p-4 sm:p-6"
+            onClick={() => setLightboxItem(null)}
+          >
+            <div
+              className="relative max-w-4xl w-full bg-[#0F172A] border border-[#334155] rounded-3xl p-4 sm:p-6 shadow-2xl overflow-hidden flex flex-col md:flex-row items-center gap-6"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Close Button */}
+              <button
+                onClick={() => setLightboxItem(null)}
+                className="absolute top-4 right-4 p-2 rounded-full bg-[#1E293B] border border-[#334155] text-white hover:bg-[#0EA5E9] transition-all z-20"
+              >
+                <span className="material-symbols-outlined text-xl">close</span>
+              </button>
+
+              {/* Image Container */}
+              <div className="w-full md:w-1/2 flex items-center justify-center bg-[#060E20] p-4 rounded-2xl border border-[#334155]">
+                <img
+                  src={lightboxItem.src}
+                  alt={lightboxItem.title}
+                  className="w-auto max-h-[70vh] object-contain rounded-xl shadow-lg"
+                />
+              </div>
+
+              {/* Information Panel */}
+              <div className="w-full md:w-1/2 space-y-4">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-[#0EA5E9]/20 border border-[#0EA5E9]/50 text-[#00EEFC] text-xs font-black uppercase">
+                  {lightboxItem.badge}
+                </div>
+                <h3 className="text-2xl font-black text-white">
+                  {lightboxItem.title}
+                </h3>
+                <p className="text-sm text-[#89CEFF] font-semibold">
+                  {lightboxItem.subtitle}
                 </p>
+                <p className="text-xs text-[#BEC8D2] font-medium leading-relaxed">
+                  {lightboxItem.description}
+                </p>
+
+                <div className="grid grid-cols-2 gap-2 pt-2">
+                  {lightboxItem.metrics.map((m, i) => (
+                    <div key={i} className="bg-[#1E293B] p-2.5 rounded-xl border border-[#334155] text-xs">
+                      <div className="text-[10px] text-[#64748B] font-bold uppercase">{m.label}</div>
+                      <div className="font-extrabold text-white mt-0.5">{m.value}</div>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="pt-2">
+                  <button
+                    onClick={() => setLightboxItem(null)}
+                    className="w-full py-3 rounded-xl bg-gradient-to-r from-[#0EA5E9] to-[#00EEFC] text-white font-extrabold text-xs uppercase tracking-wider hover:opacity-90 transition-opacity"
+                  >
+                    Close Preview
+                  </button>
+                </div>
               </div>
             </div>
-          ))}
-        </div>
+          </div>
+        )}
       </div>
     </section>
   );
 }
+
