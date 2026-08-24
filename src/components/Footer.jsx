@@ -1,7 +1,7 @@
 import React from 'react';
 import appLogo from '../assets/appLogo.png';
 
-export default function Footer({ onPrivacyClick }) {
+export default function Footer({ onPrivacyClick, onTermsClick }) {
   return (
     <footer className="bg-[#060E20] border-t border-[#334155] w-full py-16">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 px-5 max-w-7xl mx-auto">
@@ -37,7 +37,13 @@ export default function Footer({ onPrivacyClick }) {
           >
             Privacy Policy
           </a>
-          <a href="#" className="hover:text-[#0EA5E9] transition-colors">Terms of Service</a>
+          <a 
+            href="/terms" 
+            onClick={onTermsClick}
+            className="hover:text-[#0EA5E9] transition-colors focus:outline-none cursor-pointer"
+          >
+            Terms of Service
+          </a>
         </nav>
       </div>
     </footer>

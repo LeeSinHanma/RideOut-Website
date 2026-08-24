@@ -62,7 +62,7 @@ export default function Hero({ onDownloadClick }) {
       </div>
 
       {/* Showcase Stage: Smartphone Mockup (First Image) + Ryder Mascot Beside It */}
-      <div className="mt-16 relative w-full max-w-5xl mx-auto z-10 flex flex-col md:flex-row items-center justify-center gap-8 md:gap-12 px-4">
+      <div className="mt-16 relative w-full max-w-5xl mx-auto z-10 flex flex-col md:flex-row items-start justify-center gap-8 md:gap-12 px-4">
         
         {/* First Image: Hero Smartphone Mockup */}
         <div className="relative w-full max-w-[320px] md:max-w-[370px] group shrink-0">
@@ -90,13 +90,13 @@ export default function Hero({ onDownloadClick }) {
         {/* Ryder Mascot Beside First Image (Clickable with Glow Effect on Hover -> Redirects to #ryder) */}
         <a
           href="#ryder"
-          className="group relative flex flex-col items-center text-center md:items-start md:text-left w-full max-w-[340px] md:max-w-[380px] shrink-0 transition-all duration-300 cursor-pointer"
+          className="group relative flex flex-col items-center text-center md:items-start md:text-left w-full max-w-[350px] md:max-w-[390px] shrink-0 transition-all duration-300 cursor-pointer"
           title="Click to meet Ryder Mascot"
         >
           {/* Glowing Aura Backdrop on Hover */}
           <div className="absolute -inset-6 bg-gradient-to-tr from-[#00EEFC]/0 via-[#0EA5E9]/25 to-[#8B5CF6]/0 rounded-[40px] blur-2xl group-hover:from-[#00EEFC]/35 group-hover:to-[#8B5CF6]/35 transition-all duration-500 opacity-0 group-hover:opacity-100 pointer-events-none" />
 
-          {/* Speech Bubble */}
+          {/* Speech Bubble (Aligned at Top to Match Phone Mockup) */}
           <div className="relative z-20 w-full bg-[#1E293B] border border-[#334155] group-hover:border-[#00EEFC] p-5 rounded-2xl shadow-2xl transition-all duration-300 group-hover:shadow-[0_0_30px_rgba(0,238,252,0.4)] group-hover:-translate-y-1">
             <div className="flex items-center gap-2 text-xs font-black text-[#00EEFC] uppercase tracking-wider mb-1.5">
               <span className="w-2 h-2 rounded-full bg-[#00EEFC] animate-ping" />
@@ -111,12 +111,12 @@ export default function Hero({ onDownloadClick }) {
             </div>
           </div>
 
-          {/* Ryder Mascot Image Standee (Larger, matching mapUI size) */}
-          <div className="relative z-10 mt-2 flex items-center justify-center w-full">
+          {/* Ryder Mascot Standee (As tall as the phone screen) */}
+          <div className="relative z-10 mt-3 flex items-center justify-center w-full">
             <img
               src={readyWholeBody}
               alt="Ryder Mascot Vehicle Safety Check"
-              className="w-60 sm:w-72 md:w-[310px] max-h-[460px] h-auto object-contain drop-shadow-[0_15px_30px_rgba(14,165,233,0.45)] group-hover:scale-105 group-hover:drop-shadow-[0_20px_40px_rgba(0,238,252,0.75)] transition-all duration-300"
+              className="h-[380px] sm:h-[440px] md:h-[470px] w-auto max-w-full object-contain drop-shadow-[0_15px_30px_rgba(14,165,233,0.5)] group-hover:scale-105 group-hover:drop-shadow-[0_20px_45px_rgba(0,238,252,0.8)] transition-all duration-300"
             />
           </div>
         </a>
