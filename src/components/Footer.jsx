@@ -29,7 +29,7 @@ export default function Footer({ onPrivacyClick, onTermsClick }) {
           </div>
         </a>
 
-        <nav className="flex flex-wrap gap-6 text-xs font-semibold text-[#BEC8D2]">
+        <nav className="flex flex-wrap items-center gap-6 text-xs font-semibold text-[#BEC8D2]">
           <a 
             href="/privacy"
             onClick={onPrivacyClick} 

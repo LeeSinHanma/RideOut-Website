@@ -90,7 +90,7 @@ export default function MascotIntroduction() {
             <button
               key={mode.id}
               onClick={() => setActiveMode(mode.id)}
-              className={`px-5 py-2.5 rounded-2xl text-xs font-extrabold transition-all duration-300 flex items-center gap-2.5 border ${
+              className={`px-3 sm:px-5 py-2 sm:py-2.5 rounded-xl sm:rounded-2xl text-[11px] sm:text-xs font-extrabold transition-all duration-300 flex items-center gap-1.5 sm:gap-2.5 border ${
                 activeMode === mode.id
                   ? 'bg-gradient-to-r from-[#0EA5E9] to-[#00EEFC] border-[#00EEFC] text-white shadow-[0_0_20px_rgba(14,165,233,0.4)] scale-105'
                   : 'bg-[#0F172A] border-[#334155] text-[#BEC8D2] hover:border-[#0EA5E9]/50 hover:text-white'

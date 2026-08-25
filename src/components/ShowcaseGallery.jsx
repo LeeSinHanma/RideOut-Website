@@ -141,12 +141,9 @@ export default function ShowcaseGallery() {
   };
 
   return (
-    <section id="showcase" className="py-24 px-4 sm:px-6 bg-[#060E20] border-t border-[#334155]/60 relative overflow-hidden">
-      {/* Background Ambient Glow FX */}
-      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-tr from-[#0EA5E9]/10 via-[#00EEFC]/5 to-[#8B5CF6]/10 rounded-full blur-[140px] pointer-events-none" />
-
-      <div className="max-w-7xl mx-auto space-y-12 relative z-10">
-        {/* Section Title & View Switcher */}
+    <section id="showcase" className="py-20 sm:py-24 px-4 sm:px-5 relative overflow-hidden map-grid">
+      <div className="max-w-7xl mx-auto space-y-8 sm:space-y-12">
+        {/* Header Title */}
         <div className="flex flex-col md:flex-row items-center justify-between gap-6 pb-4 border-b border-[#334155]/40">
           <div className="text-center md:text-left space-y-3 max-w-2xl">
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#00EEFC]/10 border border-[#00EEFC]/30 text-[#00EEFC] font-black text-xs uppercase tracking-wider">
@@ -162,28 +159,28 @@ export default function ShowcaseGallery() {
           </div>
 
           {/* View Mode Switcher Controls */}
-          <div className="flex items-center gap-1.5 p-1.5 rounded-2xl bg-[#0F172A] border border-[#334155] shadow-inner">
+          <div className="w-full sm:w-auto flex items-center justify-center gap-1.5 p-1.5 rounded-2xl bg-[#0F172A] border border-[#334155] shadow-inner">
             <button
               onClick={() => setViewMode('spotlight')}
-              className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all duration-300 ${
+              className={`flex-1 sm:flex-initial flex items-center justify-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 rounded-xl text-xs font-bold transition-all duration-300 ${
                 viewMode === 'spotlight'
                   ? 'bg-gradient-to-r from-[#0EA5E9] to-[#00EEFC] text-white shadow-[0_0_15px_rgba(14,165,233,0.4)]'
                   : 'text-[#89CEFF] hover:text-white hover:bg-[#1E293B]'
               }`}
             >
               <span className="material-symbols-outlined text-base">phone_iphone</span>
-              Spotlight Hub
+              <span>Spotlight Hub</span>
             </button>
             <button
               onClick={() => setViewMode('grid')}
-              className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all duration-300 ${
+              className={`flex-1 sm:flex-initial flex items-center justify-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 rounded-xl text-xs font-bold transition-all duration-300 ${
                 viewMode === 'grid'
                   ? 'bg-gradient-to-r from-[#0EA5E9] to-[#00EEFC] text-white shadow-[0_0_15px_rgba(14,165,233,0.4)]'
                   : 'text-[#89CEFF] hover:text-white hover:bg-[#1E293B]'
               }`}
             >
               <span className="material-symbols-outlined text-base">grid_view</span>
-              Gallery Grid
+              <span>Gallery Grid</span>
             </button>
           </div>
         </div>
@@ -192,9 +189,9 @@ export default function ShowcaseGallery() {
         {/* SPOTLIGHT HUB MODE */}
         {/* ---------------------------------------------------- */}
         {viewMode === 'spotlight' && (
-          <div className="space-y-8">
+          <div className="space-y-6 sm:space-y-8">
             {/* Feature Tabs Quick Selector Bar */}
-            <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none">
+            <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none max-w-full">
               {galleryItems.map((item, idx) => {
                 const isActive = idx === activeIdx;
                 return (
@@ -204,7 +201,7 @@ export default function ShowcaseGallery() {
                       setActiveIdx(idx);
                       setIsAutoplay(false);
                     }}
-                    className={`whitespace-nowrap px-4 py-2.5 rounded-xl text-xs font-extrabold transition-all duration-300 flex items-center gap-2 border ${
+                    className={`whitespace-nowrap px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-xl text-xs font-extrabold transition-all duration-300 flex items-center gap-2 border ${
                       isActive
                         ? item.isPro
                           ? 'bg-[#8B5CF6]/20 border-[#8B5CF6] text-white shadow-[0_0_20px_rgba(139,92,246,0.35)]'
@@ -232,12 +229,70 @@ export default function ShowcaseGallery() {
               })}
             </div>
 
-            {/* Main Interactive Stage: 3-Column Desktop Grid (Details | Smartphone Frame | Quick Selector List) */}
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-[#0F172A]/90 p-6 sm:p-8 rounded-3xl border border-[#334155]/80 backdrop-blur-xl shadow-2xl min-h-[560px]">
+            {/* Main Interactive Stage: 3-Column Grid (Responsive Phone Height & Mobile Order) */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-center bg-[#0F172A]/90 p-4 sm:p-6 lg:p-8 rounded-2xl sm:rounded-3xl border border-[#334155]/80 backdrop-blur-xl shadow-2xl">
               
+              {/* Center Column: Realistic Mobile Phone Mockup (Ordered first on mobile for high visibility) */}
+              <div className="lg:col-span-4 flex items-center justify-center relative py-2 lg:py-4 order-first lg:order-none">
+                {/* Dynamic Screen Aura Glow */}
+                <div
+                  className={`absolute -inset-4 rounded-[48px] blur-2xl transition-all duration-700 pointer-events-none ${
+                    currentItem.isPro
+                      ? 'bg-[#8B5CF6]/30'
+                      : 'bg-[#0EA5E9]/25'
+                  }`}
+                />
+
+                {/* Smartphone Device Body (Responsive Height for mobile vs desktop) */}
+                <div className="relative w-full max-w-[270px] sm:max-w-[310px] h-[400px] sm:h-[460px] lg:h-[510px] rounded-[36px] sm:rounded-[42px] border-4 border-[#334155] bg-[#090D16] p-2.5 sm:p-3 shadow-2xl transition-all duration-500 hover:border-[#0EA5E9]/80 group flex flex-col">
+                  {/* Speaker & Dynamic Island Notch */}
+                  <div className="absolute top-3 sm:top-4 left-1/2 -translate-x-1/2 w-24 sm:w-28 h-3.5 sm:h-4 bg-[#090D16] border border-[#1E293B] rounded-b-xl z-30 flex items-center justify-center">
+                    <span className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-[#030712] border border-[#334155]" />
+                  </div>
+
+                  {/* Mobile Screen Container */}
+                  <div className="relative w-full h-full rounded-[26px] sm:rounded-[30px] overflow-hidden bg-[#060E20] border border-[#1E293B] flex flex-col">
+                    {/* Simulated OS Top Bar */}
+                    <div className="flex items-center justify-between px-4 sm:px-5 pt-2.5 sm:pt-3 pb-1 text-[10px] text-[#89CEFF] font-mono border-b border-[#334155]/40 bg-[#0F172A]/80 relative z-20 shrink-0">
+                      <span>09:41</span>
+                      <div className="flex items-center gap-1.5">
+                        <span className="material-symbols-outlined text-[12px]">signal_cellular_alt</span>
+                        <span className="material-symbols-outlined text-[12px]">wifi</span>
+                        <span className="material-symbols-outlined text-[12px]">battery_full</span>
+                      </div>
+                    </div>
+
+                    {/* Screenshot View Area */}
+                    <div 
+                      onClick={() => setLightboxItem(currentItem)}
+                      className="relative flex-1 w-full flex items-center justify-center bg-black cursor-pointer overflow-hidden group/img shrink-0"
+                    >
+                      <img
+                        key={currentItem.id}
+                        src={currentItem.src}
+                        alt={currentItem.title}
+                        className="w-full h-full object-contain transition-all duration-500 group-hover/img:scale-105"
+                      />
+
+                      {/* Click to Zoom Hover Overlay */}
+                      <div className="absolute inset-0 bg-black/40 opacity-0 group-hover/img:opacity-100 transition-opacity flex flex-col items-center justify-center text-white gap-1 backdrop-blur-[2px]">
+                        <span className="material-symbols-outlined text-3xl text-[#00EEFC]">zoom_in</span>
+                        <span className="text-xs font-black uppercase tracking-wider">Click to Zoom</span>
+                      </div>
+
+                      {/* Live Screen Watermark Indicator */}
+                      <div className="absolute bottom-2.5 left-2.5 bg-[#0F172A]/90 backdrop-blur-md px-2 py-0.5 rounded-full border border-[#0EA5E9]/40 text-[9px] sm:text-[10px] font-bold text-[#00EEFC] flex items-center gap-1.5">
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#10B981] animate-pulse" />
+                        Screen {activeIdx + 1} of {galleryItems.length}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
               {/* Left Column: Feature Details & Specs (5 Cols) */}
-              <div className="lg:col-span-5 space-y-6 flex flex-col justify-between h-full">
-                <div className="space-y-6">
+              <div className="lg:col-span-5 space-y-4 sm:space-y-6 flex flex-col justify-between h-full">
+                <div className="space-y-4 sm:space-y-6">
                   <div className="flex items-center gap-3">
                     <span
                       className={`px-3 py-1 rounded-md text-xs font-black uppercase tracking-wider border ${
@@ -255,30 +310,30 @@ export default function ShowcaseGallery() {
                     )}
                   </div>
 
-                  <div className="space-y-2">
-                    <h3 className="text-2xl sm:text-3xl font-black text-white leading-tight">
+                  <div className="space-y-1.5 sm:space-y-2">
+                    <h3 className="text-xl sm:text-3xl font-black text-white leading-tight">
                       {currentItem.title}
                     </h3>
-                    <p className="text-sm font-semibold text-[#89CEFF]">
+                    <p className="text-xs sm:text-sm font-semibold text-[#89CEFF]">
                       {currentItem.subtitle}
                     </p>
                   </div>
 
-                  <p className="text-sm text-[#BEC8D2] font-medium leading-relaxed min-h-[60px]">
+                  <p className="text-xs sm:text-sm text-[#BEC8D2] font-medium leading-relaxed min-h-0 lg:min-h-[60px]">
                     {currentItem.description}
                   </p>
 
                   {/* Key Metrics Chips */}
-                  <div className="grid grid-cols-2 gap-3 pt-2">
+                  <div className="grid grid-cols-2 gap-2.5 pt-1 sm:pt-2">
                     {currentItem.metrics.map((m, i) => (
                       <div
                         key={i}
-                        className="bg-[#1E293B]/80 p-3 rounded-xl border border-[#334155]/70 flex flex-col gap-0.5"
+                        className="bg-[#1E293B]/80 p-2.5 sm:p-3 rounded-xl border border-[#334155]/70 flex flex-col gap-0.5"
                       >
-                        <span className="text-[10px] font-bold text-[#64748B] uppercase tracking-wider">
+                        <span className="text-[9px] sm:text-[10px] font-bold text-[#64748B] uppercase tracking-wider">
                           {m.label}
                         </span>
-                        <span className="text-xs font-black text-white">
+                        <span className="text-xs sm:text-sm font-black text-white">
                           {m.value}
                         </span>
                       </div>
@@ -287,25 +342,25 @@ export default function ShowcaseGallery() {
                 </div>
 
                 {/* Stage Controls */}
-                <div className="pt-4 flex items-center justify-between border-t border-[#334155]/60">
+                <div className="pt-4 flex items-center justify-between border-t border-[#334155]/60 gap-2 flex-wrap sm:flex-nowrap">
                   <div className="flex items-center gap-2">
                     <button
                       onClick={handlePrev}
-                      className="p-2.5 rounded-xl bg-[#1E293B] border border-[#334155] text-white hover:border-[#0EA5E9] hover:bg-[#0EA5E9]/20 transition-all active:scale-95"
+                      className="p-2 sm:p-2.5 rounded-xl bg-[#1E293B] border border-[#334155] text-white hover:border-[#0EA5E9] hover:bg-[#0EA5E9]/20 transition-all active:scale-95"
                       title="Previous Screen"
                     >
-                      <span className="material-symbols-outlined text-lg">arrow_back</span>
+                      <span className="material-symbols-outlined text-base sm:text-lg">arrow_back</span>
                     </button>
                     <button
                       onClick={handleNext}
-                      className="p-2.5 rounded-xl bg-[#1E293B] border border-[#334155] text-white hover:border-[#0EA5E9] hover:bg-[#0EA5E9]/20 transition-all active:scale-95"
+                      className="p-2 sm:p-2.5 rounded-xl bg-[#1E293B] border border-[#334155] text-white hover:border-[#0EA5E9] hover:bg-[#0EA5E9]/20 transition-all active:scale-95"
                       title="Next Screen"
                     >
-                      <span className="material-symbols-outlined text-lg">arrow_forward</span>
+                      <span className="material-symbols-outlined text-base sm:text-lg">arrow_forward</span>
                     </button>
                     <button
                       onClick={() => setIsAutoplay(!isAutoplay)}
-                      className={`px-3 py-2 rounded-xl border text-xs font-extrabold flex items-center gap-1.5 transition-all ${
+                      className={`px-2.5 sm:px-3 py-2 rounded-xl border text-[11px] sm:text-xs font-extrabold flex items-center gap-1.5 transition-all ${
                         isAutoplay
                           ? 'bg-[#10B981]/20 border-[#10B981]/50 text-[#10B981]'
                           : 'bg-[#1E293B] border-[#334155] text-[#88929B]'
@@ -314,75 +369,17 @@ export default function ShowcaseGallery() {
                       <span className="material-symbols-outlined text-sm">
                         {isAutoplay ? 'pause_circle' : 'play_circle'}
                       </span>
-                      {isAutoplay ? 'Autoplay On' : 'Paused'}
+                      <span>{isAutoplay ? 'Autoplay' : 'Paused'}</span>
                     </button>
                   </div>
 
                   <button
                     onClick={() => setLightboxItem(currentItem)}
-                    className="px-3.5 py-2 rounded-xl bg-[#0EA5E9]/10 border border-[#0EA5E9]/40 text-[#00EEFC] hover:bg-[#0EA5E9] hover:text-white transition-all text-xs font-bold flex items-center gap-1.5"
+                    className="px-3 sm:px-3.5 py-2 rounded-xl bg-[#0EA5E9]/10 border border-[#0EA5E9]/40 text-[#00EEFC] hover:bg-[#0EA5E9] hover:text-white transition-all text-xs font-bold flex items-center gap-1.5 ml-auto sm:ml-0"
                   >
                     <span className="material-symbols-outlined text-sm">zoom_in</span>
-                    Expand Screen
+                    <span>Expand</span>
                   </button>
-                </div>
-              </div>
-
-              {/* Center Column: Realistic Mobile Phone Mockup (4 Cols) */}
-              <div className="lg:col-span-4 flex items-center justify-center relative py-4">
-                {/* Dynamic Screen Aura Glow */}
-                <div
-                  className={`absolute -inset-4 rounded-[48px] blur-2xl transition-all duration-700 pointer-events-none ${
-                    currentItem.isPro
-                      ? 'bg-[#8B5CF6]/30'
-                      : 'bg-[#0EA5E9]/25'
-                  }`}
-                />
-
-                {/* Smartphone Device Body (Uniform Fixed Height) */}
-                <div className="relative w-full max-w-[310px] h-[510px] rounded-[42px] border-4 border-[#334155] bg-[#090D16] p-3 shadow-2xl transition-all duration-500 hover:border-[#0EA5E9]/80 group flex flex-col">
-                  {/* Speaker & Dynamic Island Notch */}
-                  <div className="absolute top-4 left-1/2 -translate-x-1/2 w-28 h-4 bg-[#090D16] border border-[#1E293B] rounded-b-xl z-30 flex items-center justify-center">
-                    <span className="w-3 h-3 rounded-full bg-[#030712] border border-[#334155]" />
-                  </div>
-
-                  {/* Mobile Screen Container */}
-                  <div className="relative w-full h-full rounded-[30px] overflow-hidden bg-[#060E20] border border-[#1E293B] flex flex-col">
-                    {/* Simulated OS Top Bar */}
-                    <div className="flex items-center justify-between px-5 pt-3 pb-1 text-[10px] text-[#89CEFF] font-mono border-b border-[#334155]/40 bg-[#0F172A]/80 relative z-20 shrink-0">
-                      <span>09:41</span>
-                      <div className="flex items-center gap-1.5">
-                        <span className="material-symbols-outlined text-[12px]">signal_cellular_alt</span>
-                        <span className="material-symbols-outlined text-[12px]">wifi</span>
-                        <span className="material-symbols-outlined text-[12px]">battery_full</span>
-                      </div>
-                    </div>
-
-                    {/* Screenshot View Area (Strict Uniform Height h-[440px]) */}
-                    <div 
-                      onClick={() => setLightboxItem(currentItem)}
-                      className="relative h-[440px] w-full flex items-center justify-center bg-black cursor-pointer overflow-hidden group/img shrink-0"
-                    >
-                      <img
-                        key={currentItem.id}
-                        src={currentItem.src}
-                        alt={currentItem.title}
-                        className="w-full h-full object-contain transition-all duration-500 group-hover/img:scale-105"
-                      />
-
-                      {/* Click to Zoom Hover Overlay */}
-                      <div className="absolute inset-0 bg-black/40 opacity-0 group-hover/img:opacity-100 transition-opacity flex flex-col items-center justify-center text-white gap-1 backdrop-blur-[2px]">
-                        <span className="material-symbols-outlined text-3xl text-[#00EEFC]">zoom_in</span>
-                        <span className="text-xs font-black uppercase tracking-wider">Click to Zoom</span>
-                      </div>
-
-                      {/* Live Screen Watermark Indicator */}
-                      <div className="absolute bottom-3 left-3 bg-[#0F172A]/90 backdrop-blur-md px-2.5 py-1 rounded-full border border-[#0EA5E9]/40 text-[10px] font-bold text-[#00EEFC] flex items-center gap-1.5">
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#10B981] animate-pulse" />
-                        Screen {activeIdx + 1} of {galleryItems.length}
-                      </div>
-                    </div>
-                  </div>
                 </div>
               </div>
 
@@ -391,7 +388,7 @@ export default function ShowcaseGallery() {
                 <h4 className="text-xs font-black text-[#89CEFF] uppercase tracking-wider mb-2">
                   All App Screens
                 </h4>
-                <div className="space-y-2 max-h-[440px] overflow-y-auto pr-2">
+                <div className="space-y-2 max-h-[220px] sm:max-h-[300px] lg:max-h-[440px] overflow-y-auto pr-1 sm:pr-2">
                   {galleryItems.map((item, idx) => {
                     const isSelected = idx === activeIdx;
                     return (
@@ -401,7 +398,7 @@ export default function ShowcaseGallery() {
                           setActiveIdx(idx);
                           setIsAutoplay(false);
                         }}
-                        className={`p-3 rounded-2xl border transition-all cursor-pointer flex items-center gap-3 ${
+                        className={`p-2.5 sm:p-3 rounded-xl sm:rounded-2xl border transition-all cursor-pointer flex items-center gap-2.5 sm:gap-3 ${
                           isSelected
                             ? item.isPro
                               ? 'bg-[#8B5CF6]/20 border-[#8B5CF6] text-white shadow-md'
@@ -409,7 +406,7 @@ export default function ShowcaseGallery() {
                             : 'bg-[#1E293B]/60 border-[#334155]/40 text-[#BEC8D2] hover:bg-[#1E293B] hover:text-white'
                         }`}
                       >
-                        <div className="w-10 h-10 rounded-xl overflow-hidden bg-[#0F172A] border border-[#334155] shrink-0">
+                        <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl overflow-hidden bg-[#0F172A] border border-[#334155] shrink-0">
                           <img
                             src={item.src}
                             alt={item.title}
@@ -507,50 +504,51 @@ export default function ShowcaseGallery() {
         {/* ---------------------------------------------------- */}
         {lightboxItem && (
           <div
-            className="fixed inset-0 z-50 bg-black/90 backdrop-blur-xl flex items-center justify-center p-4 sm:p-6"
+            className="fixed inset-0 z-50 bg-black/95 backdrop-blur-xl flex items-center justify-center p-3 sm:p-6 overflow-y-auto"
             onClick={() => setLightboxItem(null)}
           >
             <div
-              className="relative max-w-4xl w-full bg-[#0F172A] border border-[#334155] rounded-3xl p-4 sm:p-6 shadow-2xl overflow-hidden flex flex-col md:flex-row items-center gap-6"
+              className="relative max-w-4xl w-full max-h-[90vh] bg-[#0F172A] border border-[#334155] rounded-2xl sm:rounded-3xl p-4 sm:p-6 shadow-2xl overflow-y-auto my-auto flex flex-col md:flex-row items-center md:items-start gap-4 sm:gap-6"
               onClick={(e) => e.stopPropagation()}
             >
-              {/* Close Button */}
+              {/* Perfectly Centered & Sticky Close Button */}
               <button
                 onClick={() => setLightboxItem(null)}
-                className="absolute top-4 right-4 p-2 rounded-full bg-[#1E293B] border border-[#334155] text-white hover:bg-[#0EA5E9] transition-all z-20"
+                className="sticky top-0 right-0 ml-auto -mb-8 z-40 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-slate-800/90 border border-slate-700 text-slate-300 hover:text-white hover:bg-[#0EA5E9] hover:border-[#00EEFC] transition-all flex items-center justify-center shadow-lg cursor-pointer shrink-0"
+                aria-label="Close preview"
               >
-                <span className="material-symbols-outlined text-xl">close</span>
+                <span className="text-base sm:text-lg font-bold leading-none">✕</span>
               </button>
 
-              {/* Image Container */}
-              <div className="w-full md:w-1/2 flex items-center justify-center bg-[#060E20] p-4 rounded-2xl border border-[#334155]">
+              {/* Image Container (Scaled down on mobile so text fits) */}
+              <div className="w-full md:w-1/2 flex items-center justify-center bg-[#060E20] p-2.5 sm:p-4 rounded-xl sm:rounded-2xl border border-[#334155] shrink-0">
                 <img
                   src={lightboxItem.src}
                   alt={lightboxItem.title}
-                  className="w-auto max-h-[70vh] object-contain rounded-xl shadow-lg"
+                  className="w-auto max-h-[35vh] sm:max-h-[45vh] md:max-h-[65vh] object-contain rounded-lg sm:rounded-xl shadow-lg"
                 />
               </div>
 
               {/* Information Panel */}
-              <div className="w-full md:w-1/2 space-y-4">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-[#0EA5E9]/20 border border-[#0EA5E9]/50 text-[#00EEFC] text-xs font-black uppercase">
+              <div className="w-full md:w-1/2 space-y-3 sm:space-y-4">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-[#0EA5E9]/20 border border-[#0EA5E9]/50 text-[#00EEFC] text-[11px] sm:text-xs font-black uppercase">
                   {lightboxItem.badge}
                 </div>
-                <h3 className="text-2xl font-black text-white">
+                <h3 className="text-xl sm:text-2xl font-black text-white leading-tight">
                   {lightboxItem.title}
                 </h3>
-                <p className="text-sm text-[#89CEFF] font-semibold">
+                <p className="text-xs sm:text-sm text-[#89CEFF] font-semibold">
                   {lightboxItem.subtitle}
                 </p>
-                <p className="text-xs text-[#BEC8D2] font-medium leading-relaxed">
+                <p className="text-xs sm:text-sm text-[#BEC8D2] font-medium leading-relaxed">
                   {lightboxItem.description}
                 </p>
 
-                <div className="grid grid-cols-2 gap-2 pt-2">
+                <div className="grid grid-cols-2 gap-2 pt-1 sm:pt-2">
                   {lightboxItem.metrics.map((m, i) => (
                     <div key={i} className="bg-[#1E293B] p-2.5 rounded-xl border border-[#334155] text-xs">
-                      <div className="text-[10px] text-[#64748B] font-bold uppercase">{m.label}</div>
-                      <div className="font-extrabold text-white mt-0.5">{m.value}</div>
+                      <div className="text-[9px] sm:text-[10px] text-[#64748B] font-bold uppercase">{m.label}</div>
+                      <div className="font-extrabold text-white mt-0.5 text-xs sm:text-sm">{m.value}</div>
                     </div>
                   ))}
                 </div>

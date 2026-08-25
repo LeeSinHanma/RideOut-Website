@@ -13,6 +13,7 @@
     "@heroui/react": "^3.2.4",
     "@heroui/styles": "^3.2.4",
     "@tailwindcss/postcss": "^4.3.3",
+    "firebase": "^12.18.0",
     "postcss": "^8.5.26",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
