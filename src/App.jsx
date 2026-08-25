@@ -10,31 +10,63 @@ import Footer from './components/Footer';
 import DownloadModal from './components/DownloadModal';
 import PrivacyPolicyModal from './components/PrivacyPolicyModal';
 import TermsOfServiceModal from './components/TermsOfServiceModal';
+import AuthActionPage from './components/AuthActionPage';
 
 export default function App() {
   const [isDownloadOpen, setIsDownloadOpen] = useState(false);
   const [isPrivacyOpen, setIsPrivacyOpen] = useState(false);
   const [isTermsOpen, setIsTermsOpen] = useState(false);
+  const [isAuthActionOpen, setIsAuthActionOpen] = useState(false);
+  const [authActionInitialMode, setAuthActionInitialMode] = useState(null);
 
   // Check URL path/hash on load and state changes for direct link navigation
   useEffect(() => {
     const checkRoute = () => {
       const path = window.location.pathname.toLowerCase();
       const hash = window.location.hash.toLowerCase();
-      if (
-        path === '/privacy' ||
-        path === '/privacy-policy' ||
-        path === '/privacy.html' ||
-        hash === '#privacy'
-      ) {
-        setIsPrivacyOpen(true);
-      } else if (
-        path === '/terms' ||
-        path === '/terms-of-service' ||
-        path === '/terms.html' ||
-        hash === '#terms'
-      ) {
-        setIsTermsOpen(true);
+      const searchParams = new URLSearchParams(window.location.search);
+      const modeParam = searchParams.get('mode');
+      const oobCodeParam = searchParams.get('oobCode');
+
+      // Auth Action Portal strictly requires an oobCode parameter from a valid Firebase email link
+      const isAuthRoute = 
+        path === '/verify' ||
+        path === '/verify-email' ||
+        path === '/reset-password' ||
+        path === '/password-reset' ||
+        path === '/auth/action' ||
+        Boolean(modeParam);
+
+      if (isAuthRoute && oobCodeParam) {
+        if (path.includes('verify') || modeParam === 'verifyEmail') {
+          setAuthActionInitialMode('verifyEmail');
+        } else if (path.includes('reset') || modeParam === 'resetPassword') {
+          setAuthActionInitialMode('resetPassword');
+        }
+        setIsAuthActionOpen(true);
+      } else {
+        setIsAuthActionOpen(false);
+        
+        // If user manually typed /verify or /reset-password without an oobCode, redirect address bar to '/'
+        if (isAuthRoute && !oobCodeParam && window.history && window.history.replaceState) {
+          window.history.replaceState(null, '', '/');
+        }
+
+        if (
+          path === '/privacy' ||
+          path === '/privacy-policy' ||
+          path === '/privacy.html' ||
+          hash === '#privacy'
+        ) {
+          setIsPrivacyOpen(true);
+        } else if (
+          path === '/terms' ||
+          path === '/terms-of-service' ||
+          path === '/terms.html' ||
+          hash === '#terms'
+        ) {
+          setIsTermsOpen(true);
+        }
       }
     };
 
@@ -46,6 +78,13 @@ export default function App() {
       window.removeEventListener('hashchange', checkRoute);
     };
   }, []);
+
+  const handleCloseAuthAction = () => {
+    setIsAuthActionOpen(false);
+    if (window.history && window.history.pushState) {
+      window.history.pushState(null, '', '/');
+    }
+  };
 
   const handleOpenDownload = () => {
     setIsDownloadOpen(true);
@@ -112,6 +151,16 @@ export default function App() {
       window.history.pushState(null, '', '/privacy');
     }
   };
+
+  // If landing on auth link (/verify, /reset-password, or ?mode=...&oobCode=...), render full screen AuthActionPage
+  if (isAuthActionOpen) {
+    return (
+      <AuthActionPage 
+        initialMode={authActionInitialMode} 
+        onBackToHome={handleCloseAuthAction} 
+      />
+    );
+  }
 
   return (
     <div className="bg-[#0F172A] min-h-screen text-[#DAE2FD] font-['Inter',sans-serif] selection:bg-[#0EA5E9] selection:text-white">

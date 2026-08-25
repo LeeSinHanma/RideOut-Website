@@ -38,24 +38,24 @@ export default function Hero({ onDownloadClick }) {
         </p>
 
         {/* CTA Button Hierarchy: Android Highlighted as Primary, iOS Muted as Secondary */}
-        <div className="flex flex-col sm:flex-row items-center gap-4 mt-2 w-full sm:w-auto">
+        <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4 mt-2 w-full sm:w-auto px-2 sm:px-0">
           {/* Primary Highlighted Android Button */}
           <Button
             onPress={onDownloadClick}
-            className="w-full sm:w-auto bg-gradient-to-r from-[#0EA5E9] to-[#00EEFC] hover:from-[#0284C7] hover:to-[#0EA5E9] text-white font-extrabold text-base px-8 py-4 rounded-xl transition-all duration-300 hover:shadow-[0_0_30px_rgba(14,165,233,0.5)] active:scale-95 flex items-center justify-center gap-3 shadow-lg"
+            className="w-full sm:w-auto bg-gradient-to-r from-[#0EA5E9] to-[#00EEFC] hover:from-[#0284C7] hover:to-[#0EA5E9] text-white font-extrabold text-sm sm:text-base px-5 sm:px-8 py-3.5 sm:py-4 rounded-xl transition-all duration-300 hover:shadow-[0_0_30px_rgba(14,165,233,0.5)] active:scale-95 flex items-center justify-center gap-2 sm:gap-3 shadow-lg"
           >
-            <span className="material-symbols-outlined text-xl">android</span>
-            Download Android App (Play Store)
+            <span className="material-symbols-outlined text-lg sm:text-xl">android</span>
+            <span>Download Android App</span>
           </Button>
 
           {/* Secondary Muted iOS Button */}
           <div className="w-full sm:w-auto opacity-70">
             <Button
-              className="w-full sm:w-auto bg-[#0F172A]/80 text-[#64748B] font-bold text-sm px-6 py-4 rounded-xl border border-[#334155]/60 flex items-center justify-center gap-2.5 cursor-not-allowed"
+              className="w-full sm:w-auto bg-[#0F172A]/80 text-[#64748B] font-bold text-xs sm:text-sm px-4 sm:px-6 py-3.5 sm:py-4 rounded-xl border border-[#334155]/60 flex items-center justify-center gap-2 cursor-not-allowed"
             >
-              <span className="material-symbols-outlined text-lg">apple</span>
+              <span className="material-symbols-outlined text-base sm:text-lg">apple</span>
               iOS App
-              <span className="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded bg-[#334155]/60 text-[#88929B] ml-1">SOON</span>
+              <span className="text-[10px] font-extrabold uppercase px-1.5 py-0.5 rounded bg-[#334155]/60 text-[#88929B] ml-1">SOON</span>
             </Button>
           </div>
         </div>

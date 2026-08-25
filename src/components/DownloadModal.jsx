@@ -92,7 +92,8 @@ export default function DownloadModal({ isOpen, onClose }) {
             className="w-full bg-gradient-to-r from-[#0EA5E9] to-[#00EEFC] hover:from-[#0284C7] hover:to-[#0EA5E9] text-white font-extrabold py-4 rounded-xl flex items-center justify-center gap-2 text-sm shadow-md hover:shadow-[0_0_25px_rgba(14,165,233,0.4)] active:scale-95"
           >
             <span className="material-symbols-outlined text-lg">assignment</span>
-            <span>Apply for Tester Access (Google Form)</span>
+            <span className="hidden sm:inline">Apply for Tester Access (Google Form)</span>
+            <span className="sm:hidden">Apply for Tester Access</span>
           </Button>
 
           {/* Secondary Muted iOS Button */}
