@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import proIconFace from '../assets/proIconFace.png';
 import winkIconFace from '../assets/winkIconFace.png';
 
@@ -25,8 +25,8 @@ export default function Features() {
     },
     {
       id: 'group-tracking',
-      title: '20+ Rider Convoys',
-      description: 'Connect up to 3 riders 100% free per session, or upgrade to RideOut PRO to host 20+ rider pack convoys.',
+      title: '10 Rider Convoys',
+      description: 'Connect up to 3 riders 100% free per session, or upgrade to RideOut PRO to host up to 10 rider pack convoys.',
       icon: 'groups',
       accentColor: '#00EEFC',
       glowClass: 'hover:border-[#00EEFC]/60 hover:shadow-[0_0_20px_rgba(0,238,252,0.2)]',
