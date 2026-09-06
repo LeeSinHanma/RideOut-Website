@@ -38,7 +38,7 @@ export default function ShowcaseGallery() {
       src: riderUI,
       isPro: false,
       metrics: [
-        { label: 'Squad Capacity', value: 'Up to 50' },
+        { label: 'Squad Capacity', value: 'Up to 10 Riders' },
         { label: 'Telemetry Metrics', value: 'Speed & Battery' },
         { label: 'Connection Watch', value: 'Live Heartbeat' },
         { label: 'Rider Status', value: 'Active Pack' }
