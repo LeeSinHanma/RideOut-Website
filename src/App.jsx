@@ -1,19 +1,39 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import MascotIntroduction from './components/MascotIntroduction';
-import ProblemSolution from './components/ProblemSolution';
+import HowItWorks from './components/HowItWorks';
+import Plans from './components/Plans';
+import Faq from './components/Faq';
 import Features from './components/Features';
 import ShowcaseGallery from './components/ShowcaseGallery';
 import CtaSection from './components/CtaSection';
 import Footer from './components/Footer';
-import DownloadModal from './components/DownloadModal';
 import PrivacyPolicyModal from './components/PrivacyPolicyModal';
 import TermsOfServiceModal from './components/TermsOfServiceModal';
 import AuthActionPage from './components/AuthActionPage';
 
 export default function App() {
-  const [isDownloadOpen, setIsDownloadOpen] = useState(false);
+  useEffect(() => {
+    if (!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08 });
+    const elements = document.querySelectorAll('.section-heading, .surface-card, .ride-step, .gallery-stage');
+    elements.forEach(element => {
+      element.classList.add('scroll-reveal');
+      observer.observe(element);
+    });
+    return () => {
+      observer.disconnect();
+      elements.forEach(element => element.classList.remove('scroll-reveal'));
+    };
+  }, []);
   const [isPrivacyOpen, setIsPrivacyOpen] = useState(false);
   const [isTermsOpen, setIsTermsOpen] = useState(false);
   const [isAuthActionOpen, setIsAuthActionOpen] = useState(false);
@@ -86,14 +106,6 @@ export default function App() {
     }
   };
 
-  const handleOpenDownload = () => {
-    setIsDownloadOpen(true);
-  };
-
-  const handleCloseDownload = () => {
-    setIsDownloadOpen(false);
-  };
-
   const handleOpenPrivacy = (e) => {
     if (e && e.preventDefault) e.preventDefault();
     setIsPrivacyOpen(true);
@@ -164,29 +176,22 @@ export default function App() {
 
   return (
     <div className="bg-[#0F172A] min-h-screen text-[#DAE2FD] font-['Inter',sans-serif] selection:bg-[#0EA5E9] selection:text-white">
-      <Header 
-        onDownloadClick={handleOpenDownload} 
-        onPrivacyClick={handleOpenPrivacy}
-        onTermsClick={handleOpenTerms}
-      />
+      <Header />
 
-      <main className="pt-20">
-        <Hero onDownloadClick={handleOpenDownload} />
-        <MascotIntroduction />
-        <ProblemSolution />
+      <main id="main-content" tabIndex={-1} className="pt-20">
+        <Hero />
+        <HowItWorks />
         <Features />
         <ShowcaseGallery />
-        <CtaSection onDownloadClick={handleOpenDownload} />
+        <Plans />
+        <MascotIntroduction />
+        <Faq onPrivacyClick={handleOpenPrivacy} />
+        <CtaSection />
       </main>
 
       <Footer 
         onPrivacyClick={handleOpenPrivacy} 
         onTermsClick={handleOpenTerms}
-      />
-
-      <DownloadModal 
-        isOpen={isDownloadOpen} 
-        onClose={handleCloseDownload} 
       />
 
       <PrivacyPolicyModal

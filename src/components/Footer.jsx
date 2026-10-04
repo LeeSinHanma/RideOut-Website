@@ -1,4 +1,3 @@
-import React from 'react';
 import appLogo from '../assets/appLogo.png';
 
 export default function Footer({ onPrivacyClick, onTermsClick }) {
@@ -24,7 +23,7 @@ export default function Footer({ onPrivacyClick, onTermsClick }) {
               RideOut
             </div>
             <div className="text-xs text-[#88929B] font-medium">
-              © {new Date().getFullYear()} RideOut Inc. Master the Ride.
+              © {new Date().getFullYear()} RideOut Inc. Ride as One.
             </div>
           </div>
         </a>
@@ -33,14 +32,14 @@ export default function Footer({ onPrivacyClick, onTermsClick }) {
           <a 
             href="/privacy"
             onClick={onPrivacyClick} 
-            className="hover:text-[#0EA5E9] transition-colors focus:outline-none cursor-pointer"
+            className="hover:text-[#0EA5E9] transition-colors cursor-pointer"
           >
             Privacy Policy
           </a>
           <a 
             href="/terms" 
             onClick={onTermsClick}
-            className="hover:text-[#0EA5E9] transition-colors focus:outline-none cursor-pointer"
+            className="hover:text-[#0EA5E9] transition-colors cursor-pointer"
           >
             Terms of Service
           </a>
