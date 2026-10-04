@@ -37,6 +37,10 @@ export default function Hero({ onDownloadClick }) {
           Real-time group location sharing designed for riders on the road. Stop texting, start tracking seamlessly.
         </p>
 
+        <p className="text-xs sm:text-sm font-bold text-[#00EEFC]">
+          Now available on Google Play · Beta
+        </p>
+
         {/* CTA Button Hierarchy: Android Highlighted as Primary, iOS Muted as Secondary */}
         <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4 mt-2 w-full sm:w-auto px-2 sm:px-0">
           {/* Primary Highlighted Android Button */}
@@ -45,7 +49,7 @@ export default function Hero({ onDownloadClick }) {
             className="w-full sm:w-auto bg-gradient-to-r from-[#0EA5E9] to-[#00EEFC] hover:from-[#0284C7] hover:to-[#0EA5E9] text-white font-extrabold text-sm sm:text-base px-5 sm:px-8 py-3.5 sm:py-4 rounded-xl transition-all duration-300 hover:shadow-[0_0_30px_rgba(14,165,233,0.5)] active:scale-95 flex items-center justify-center gap-2 sm:gap-3 shadow-lg"
           >
             <span className="material-symbols-outlined text-lg sm:text-xl">android</span>
-            <span>Download Android App</span>
+            <span>Download Android Beta</span>
           </Button>
 
           {/* Secondary Muted iOS Button */}

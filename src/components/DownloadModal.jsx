@@ -6,8 +6,7 @@ export default function DownloadModal({ isOpen, onClose }) {
   const [shouldRender, setShouldRender] = useState(false);
   const [animateIn, setAnimateIn] = useState(false);
 
-  // Configurable Google Form testing URL from Vercel / environment variables
-  const TESTER_FORM_URL = import.meta.env.VITE_TESTER_FORM_URL || 'https://forms.gle/7rwERovv4JXTd3nU7';
+  const GOOGLE_PLAY_URL = 'https://play.google.com/store/apps/details?id=com.rideout.app';
 
   useEffect(() => {
     if (isOpen) {
@@ -61,10 +60,10 @@ export default function DownloadModal({ isOpen, onClose }) {
           <span className="material-symbols-outlined text-xl">close</span>
         </button>
 
-        {/* Testing Phase Notice Badge */}
+        {/* Beta Availability Badge */}
         <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#00EEFC]/10 border border-[#00EEFC]/40 text-[#00EEFC] font-extrabold text-[11px] uppercase tracking-wider shadow">
           <span className="w-2 h-2 rounded-full bg-[#00EEFC] animate-ping shrink-0" />
-          Currently in Closed Testing Phase
+          Available on Google Play · Beta
         </div>
 
         {/* Mascot & Header */}
@@ -75,25 +74,24 @@ export default function DownloadModal({ isOpen, onClose }) {
             className="w-20 h-20 object-contain drop-shadow-[0_0_15px_rgba(14,165,233,0.5)]"
           />
           <h3 className="text-2xl font-black text-white">
-            Join Closed Testing
+            Download RideOut Beta
           </h3>
         </div>
 
         {/* Body Description */}
         <p className="text-xs sm:text-sm text-[#BEC8D2] text-center font-medium leading-relaxed">
-          RideOut is currently in an active <strong className="text-white font-bold">Closed Testing Phase</strong>. Please complete the application form below to get your Google Play account whitelisted for early access.
+          RideOut is now available in <strong className="text-white font-bold">beta on Google Play</strong>. Download the Android app and ride as one with your pack.
         </p>
 
         {/* CTA Buttons */}
         <div className="flex flex-col gap-3 w-full pt-2">
-          {/* Primary Google Form Application Button */}
+          {/* Primary Google Play Download Button */}
           <Button 
-            onPress={() => window.open(TESTER_FORM_URL, '_blank')}
+            onPress={() => window.open(GOOGLE_PLAY_URL, '_blank', 'noopener,noreferrer')}
             className="w-full bg-gradient-to-r from-[#0EA5E9] to-[#00EEFC] hover:from-[#0284C7] hover:to-[#0EA5E9] text-white font-extrabold py-4 rounded-xl flex items-center justify-center gap-2 text-sm shadow-md hover:shadow-[0_0_25px_rgba(14,165,233,0.4)] active:scale-95"
           >
-            <span className="material-symbols-outlined text-lg">assignment</span>
-            <span className="hidden sm:inline">Apply for Tester Access (Google Form)</span>
-            <span className="sm:hidden">Apply for Tester Access</span>
+            <span className="material-symbols-outlined text-lg">android</span>
+            <span>Get it on Google Play</span>
           </Button>
 
           {/* Secondary Muted iOS Button */}

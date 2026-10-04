@@ -23,25 +23,25 @@ export default function CtaSection({ onDownloadClick }) {
         <div className="space-y-4">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#00EEFC]/10 border border-[#00EEFC]/40 text-[#00EEFC] font-extrabold text-xs uppercase tracking-wider shadow">
             <span className="w-2 h-2 rounded-full bg-[#00EEFC] animate-ping" />
-            Closed Testing Phase Active
+            Available on Google Play · Beta
           </div>
           <h2 className="text-3xl md:text-5xl font-black text-white tracking-tight">
             Ready to Ride?
           </h2>
           <p className="text-base md:text-xl text-[#BEC8D2] font-medium max-w-xl mx-auto leading-relaxed">
-            Apply for closed testing access today and ensure you never leave a rider behind on your next pack adventure.
+            Download RideOut beta on Google Play and keep your pack together on your next adventure.
           </p>
         </div>
 
-        {/* CTA Button Hierarchy: Primary Join Testing Button & Secondary iOS Button */}
+        {/* CTA Button Hierarchy: Primary Download Button & Secondary iOS Button */}
         <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4 w-full sm:w-auto mt-2 px-2 sm:px-0">
-          {/* Primary Highlighted Join Testing Button */}
+          {/* Primary Highlighted Download Button */}
           <Button
             onPress={onDownloadClick}
             className="w-full sm:w-auto bg-gradient-to-r from-[#0EA5E9] to-[#00EEFC] hover:from-[#0284C7] hover:to-[#0EA5E9] text-white font-extrabold text-sm sm:text-base px-5 sm:px-8 py-3.5 sm:py-4 rounded-xl transition-all duration-300 hover:shadow-[0_0_30px_rgba(14,165,233,0.5)] active:scale-95 flex items-center justify-center gap-2 sm:gap-3 shadow-lg"
           >
-            <span className="material-symbols-outlined text-lg sm:text-xl">assignment</span>
-            <span>Join Testing Today!</span>
+            <span className="material-symbols-outlined text-lg sm:text-xl">android</span>
+            <span>Download Android Beta</span>
           </Button>
 
           {/* Secondary Muted iOS Button */}
