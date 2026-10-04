@@ -68,28 +68,28 @@ export default function PrivacyPolicyModal({ isOpen, onClose, onSwitchToTerms })
 
   return (
     <div 
-      className={`fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-3 sm:p-6 overflow-y-auto transition-all duration-300 ${
+      className={`legal-backdrop fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-3 sm:p-6 overflow-y-auto transition-all duration-300 ${
         animateIn ? 'opacity-100' : 'opacity-0 pointer-events-none'
       }`}
       onClick={handleClose}
     >
       {/* Legal Fine Print Document Container */}
       <div 
-        className={`relative w-full max-w-4xl bg-[#0B1326] border border-[#334155] rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh] transition-all duration-300 transform ${
+        className={`legal-dialog relative w-full max-w-4xl bg-[#0B1326] border border-[#334155] rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh] transition-all duration-300 transform ${
           animateIn ? 'scale-100 opacity-100 translate-y-0' : 'scale-95 opacity-0 translate-y-4'
         }`}
         onClick={(e) => e.stopPropagation()}
       >
         
         {/* Document Header Bar */}
-        <div className="px-6 py-4 bg-[#060E20] border-b border-[#334155] flex flex-col sm:flex-row sm:items-center justify-between gap-4 shrink-0">
+        <div className="legal-header px-6 py-4 bg-[#060E20] border-b border-[#334155] flex flex-col sm:flex-row sm:items-center justify-between gap-4 shrink-0">
           <div>
             <div className="flex items-center gap-3">
-              <h2 className="text-lg font-bold text-white tracking-wide uppercase font-mono">
+              <h2 className="legal-title text-lg font-bold text-white tracking-wide uppercase font-mono">
                 RideOut Privacy Policy
               </h2>
               {/* Tab Switcher */}
-              <div className="flex items-center gap-1 bg-[#1E293B] p-1 rounded-lg border border-[#334155]">
+              <div className="legal-tabs flex items-center gap-1 bg-[#1E293B] p-1 rounded-lg border border-[#334155]">
                 <button
                   onClick={() => setActiveTab('overview')}
                   className={`px-2.5 py-1 rounded text-xs font-bold transition-all ${
@@ -113,12 +113,12 @@ export default function PrivacyPolicyModal({ isOpen, onClose, onSwitchToTerms })
                 </button>
               </div>
             </div>
-            <div className="text-xs text-[#88929B] font-mono mt-1">
+            <div className="legal-metadata text-xs text-[#88929B] font-mono mt-1">
               Legal Entity: Saiken Studio | Package: com.rideout.app | Effective: August 24, 2026
             </div>
           </div>
 
-          <div className="flex items-center gap-2 flex-wrap sm:flex-nowrap">
+          <div className="legal-actions flex items-center gap-2 flex-wrap sm:flex-nowrap">
             {/* Download PDF Button */}
             <a
               href="/RideOut_Privacy_Policy.pdf"
@@ -166,7 +166,7 @@ export default function PrivacyPolicyModal({ isOpen, onClose, onSwitchToTerms })
 
         {/* View Mode 1: Full Embedded PDF Viewer */}
         {activeTab === 'pdf' ? (
-          <div className="p-4 flex-1 flex flex-col bg-[#090D16] min-h-[500px]">
+          <div className="legal-pdf p-4 flex-1 flex flex-col bg-[#090D16] min-h-[500px]">
             <div className="bg-[#1E293B] p-3 rounded-xl border border-[#334155] mb-3 flex items-center justify-between text-xs text-[#89CEFF]">
               <span className="font-mono">Official Document File: RideOut_Privacy_Policy.pdf</span>
               <a
@@ -187,10 +187,10 @@ export default function PrivacyPolicyModal({ isOpen, onClose, onSwitchToTerms })
           </div>
         ) : (
           /* View Mode 2: Structured Web Overview Text */
-          <div className="p-6 sm:p-8 overflow-y-auto font-sans text-slate-300 text-xs sm:text-sm leading-relaxed space-y-6 select-text">
+          <div className="legal-body p-6 sm:p-8 overflow-y-auto font-sans text-slate-300 text-xs sm:text-sm leading-relaxed space-y-6 select-text">
             
             {/* Legal Document Overview Notice Banner */}
-            <div className="bg-[#0EA5E9]/10 border border-[#0EA5E9]/40 p-4 rounded-xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs">
+            <div className="legal-notice bg-[#0EA5E9]/10 border border-[#0EA5E9]/40 p-4 rounded-xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs">
               <div className="flex items-start gap-2.5">
                 <span className="material-symbols-outlined text-[#00EEFC] text-xl shrink-0 mt-0.5">info</span>
                 <div>
@@ -295,10 +295,12 @@ export default function PrivacyPolicyModal({ isOpen, onClose, onSwitchToTerms })
                 You have the right to request complete access to, correction of, or permanent deletion of your account data under the Philippine Data Privacy Act of 2012 (RA 10173) and GDPR.
               </p>
               <div className="p-4 bg-slate-900 border border-slate-800 rounded-xl space-y-1 text-xs">
-                <strong className="text-white block">Account Deletion Request Procedure:</strong>
-                <div>1. Email: <a href="mailto:saikenstudio.app@gmail.com?subject=Account%20Deletion%20Request%20-%20RideOut" className="text-sky-400 underline font-mono">saikenstudio.app@gmail.com</a></div>
-                <div>2. Subject Line: <code className="text-sky-400">Account Deletion Request - RideOut</code></div>
-                <div>3. Fulfillment: Account profile, saved places, and ride history records will be permanently purged within thirty (30) calendar days.</div>
+                <strong className="text-white block">Delete Your Account in the App:</strong>
+                <div>1. Open <strong>Settings</strong> in RideOut.</div>
+                <div>2. Go to <strong>Account &amp; Danger Zone</strong>.</div>
+                <div>3. Select <strong>Delete Account Permanently</strong>.</div>
+                <div>4. Enter your password to confirm permanent account deletion.</div>
+                <div className="pt-2">If you cannot access the app, email <a href="mailto:saikenstudio.app@gmail.com?subject=Account%20Deletion%20Request%20-%20RideOut" className="text-sky-400 underline font-mono">saikenstudio.app@gmail.com</a> with the subject <code className="text-sky-400">Account Deletion Request - RideOut</code>. Account profile, saved places, and ride history records requested through email will be permanently purged within thirty (30) business days.</div>
               </div>
             </section>
 
@@ -306,7 +308,7 @@ export default function PrivacyPolicyModal({ isOpen, onClose, onSwitchToTerms })
         )}
 
         {/* Document Footer Bar */}
-        <div className="px-6 py-4 bg-[#060E20] border-t border-[#334155] flex flex-col sm:flex-row sm:items-center justify-between gap-3 shrink-0 text-xs text-[#88929B]">
+        <div className="legal-footer px-6 py-4 bg-[#060E20] border-t border-[#334155] flex flex-col sm:flex-row sm:items-center justify-between gap-3 shrink-0 text-xs text-[#88929B]">
           <div className="flex items-center gap-3 flex-wrap">
             <span>© 2026 Saiken Studio. All rights reserved.</span>
             {onSwitchToTerms && (

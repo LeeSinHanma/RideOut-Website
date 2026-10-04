@@ -238,10 +238,16 @@ You hold full statutory rights under the Philippine Data Privacy Act of 2012, GD
 * **Right to Object / Opt-Out:** Leave active ride rooms or disable location permissions at any time.
 
 ### 13.2 Account & Data Deletion Procedure
-To request permanent deletion of your account, profile, and associated ride history:
+To permanently delete your account in the RideOut app:
+1. Open **Settings**.
+2. Go to **Account & Danger Zone**.
+3. Select **Delete Account Permanently**.
+4. Enter your password to confirm permanent account deletion.
+
+If you cannot access the app, you can request permanent deletion of your account, profile, and associated ride history by email:
 1. Send an email to **`saikenstudio.app@gmail.com`** with the subject line: **`Account Deletion Request - RideOut`**.
 2. Include your registered email address and unique Rider Tag (e.g., `ALEX#8920`).
-3. Following identity verification, your data will be permanently deleted from Firebase Authentication, Realtime Database, and server logs within **thirty (30) calendar days**.
+3. Following identity verification, your data will be permanently deleted from Firebase Authentication, Realtime Database, and server logs within **thirty (30) business days**.
 
 ---
 

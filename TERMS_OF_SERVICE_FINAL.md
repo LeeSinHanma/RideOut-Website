@@ -146,7 +146,13 @@ You retain ownership of any display name, profile text, or saved locations you u
 You may stop using RideOut at any time by uninstalling the Application from your device.
 
 ### 11.2 Account Deletion Process
-To request permanent deletion of your registered user account, rider profile, and stored ride history:
+To permanently delete your account in the RideOut app:
+1. Open **Settings**.
+2. Go to **Account & Danger Zone**.
+3. Select **Delete Account Permanently**.
+4. Enter your password to confirm permanent account deletion.
+
+If you cannot access the app, you can request permanent deletion of your registered user account, rider profile, and stored ride history by email:
 1. Send an email to `saikenstudio.app@gmail.com` with the subject line: **"Account Deletion Request - RideOut"**.
 2. Include your registered email address and unique Rider Tag (e.g., `ALEX#8920`).
 3. Upon identity verification, we will permanently purge your user record from Firebase Authentication, Realtime Database (`users/$uid`, `user_history/$uid`, `user_saved_locations/$uid`), and server logs within **thirty (30) business days**, in alignment with Section 13.2 of our [Privacy Policy](PRIVACY_POLICY_FINAL.md).

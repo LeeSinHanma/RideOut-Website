@@ -1,59 +1,12 @@
-import React from 'react';
-import { Button } from '@heroui/react';
-import readyWholeBody from '../assets/readyWholeBody.png';
-
-export default function CtaSection({ onDownloadClick }) {
+import DownloadLink from './DownloadLink';
+import approveWholeBody from '../assets/approveWholeBody.png';
+export default function CtaSection() {
   return (
-    <section className="py-24 px-5 relative overflow-hidden map-grid flex flex-col items-center text-center">
-      {/* Background Radial Glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-[#0EA5E9]/10 rounded-full blur-[120px] pointer-events-none" />
-
-      <div className="relative z-10 max-w-3xl mx-auto flex flex-col items-center gap-8">
-        {/* Ready Mascot Graphic */}
-        <div className="relative group">
-          <div className="absolute -inset-4 bg-[#0EA5E9]/20 rounded-full blur-xl transition-all duration-500 group-hover:bg-[#0EA5E9]/40" />
-          <img 
-            src={readyWholeBody} 
-            alt="Ready RideOut Mascot" 
-            className="relative w-28 h-28 md:w-32 md:h-32 object-contain drop-shadow-[0_0_20px_rgba(14,165,233,0.6)]"
-          />
-        </div>
-
-        {/* Section Headline */}
-        <div className="space-y-4">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#00EEFC]/10 border border-[#00EEFC]/40 text-[#00EEFC] font-extrabold text-xs uppercase tracking-wider shadow">
-            <span className="w-2 h-2 rounded-full bg-[#00EEFC] animate-ping" />
-            Available on Google Play · Beta
-          </div>
-          <h2 className="text-3xl md:text-5xl font-black text-white tracking-tight">
-            Ready to Ride?
-          </h2>
-          <p className="text-base md:text-xl text-[#BEC8D2] font-medium max-w-xl mx-auto leading-relaxed">
-            Download RideOut beta on Google Play and keep your pack together on your next adventure.
-          </p>
-        </div>
-
-        {/* CTA Button Hierarchy: Primary Download Button & Secondary iOS Button */}
-        <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4 w-full sm:w-auto mt-2 px-2 sm:px-0">
-          {/* Primary Highlighted Download Button */}
-          <Button
-            onPress={onDownloadClick}
-            className="w-full sm:w-auto bg-gradient-to-r from-[#0EA5E9] to-[#00EEFC] hover:from-[#0284C7] hover:to-[#0EA5E9] text-white font-extrabold text-sm sm:text-base px-5 sm:px-8 py-3.5 sm:py-4 rounded-xl transition-all duration-300 hover:shadow-[0_0_30px_rgba(14,165,233,0.5)] active:scale-95 flex items-center justify-center gap-2 sm:gap-3 shadow-lg"
-          >
-            <span className="material-symbols-outlined text-lg sm:text-xl">android</span>
-            <span>Download Android Beta</span>
-          </Button>
-
-          {/* Secondary Muted iOS Button */}
-          <div className="w-full sm:w-auto opacity-70">
-            <Button
-              className="w-full sm:w-auto bg-[#0F172A]/80 text-[#64748B] font-bold text-xs sm:text-sm px-4 sm:px-6 py-3.5 sm:py-4 rounded-xl border border-[#334155]/60 flex items-center justify-center gap-2 cursor-not-allowed"
-            >
-              <span className="material-symbols-outlined text-base sm:text-lg">apple</span>
-              iOS App
-              <span className="text-[10px] font-extrabold uppercase px-1.5 py-0.5 rounded bg-[#334155]/60 text-[#88929B] ml-1">SOON</span>
-            </Button>
-          </div>
+    <section className="page-container pb-16 sm:pb-24">
+      <div className="ride-cta mascot-cta rounded-3xl px-6 py-12 sm:p-14">
+        <div className="cta-mascot-stage"><img src={approveWholeBody} alt="Ryder giving a thumbs-up for your next ride" loading="lazy" decoding="async" /></div>
+        <div className="cta-copy">
+        <p className="eyebrow">Available on Google Play · Beta</p><h2 className="text-3xl sm:text-5xl font-bold text-white tracking-tight mt-4">Your next ride starts together.</h2><p className="text-[#BEC8D2] mt-4 mb-7 max-w-lg mx-auto">Get RideOut, invite your group, and make a plan for the road ahead.</p><DownloadLink /><p className="text-sm text-[#94A3B8] mt-4">Android beta available now. iOS is coming soon.</p>
         </div>
       </div>
     </section>
