@@ -8,7 +8,7 @@ export default function Footer({ onPrivacyClick, onTermsClick }) {
           href="#"
           onClick={(e) => {
             e.preventDefault();
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            window.scrollTo({ top: 0, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' });
           }}
           className="flex items-center gap-3 group cursor-pointer"
           title="Back to Top"
@@ -25,6 +25,7 @@ export default function Footer({ onPrivacyClick, onTermsClick }) {
             <div className="text-xs text-[#88929B] font-medium">
               © {new Date().getFullYear()} RideOut Inc. Ride as One.
             </div>
+            <p className="text-xs text-[#94A3B8] mt-1">Available only on Google Play.</p>
           </div>
         </a>
 

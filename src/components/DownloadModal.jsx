@@ -94,13 +94,6 @@ export default function DownloadModal({ isOpen, onClose }) {
             <span>Get it on Google Play</span>
           </Button>
 
-          {/* Secondary Muted iOS Button */}
-          <Button 
-            className="w-full bg-[#0F172A]/80 border border-[#334155]/60 text-[#64748B] font-bold py-3 rounded-xl flex items-center justify-center gap-2 text-xs cursor-not-allowed opacity-70"
-          >
-            <span className="material-symbols-outlined text-base">apple</span>
-            <span>iOS App (Coming Soon)</span>
-          </Button>
         </div>
 
       </div>

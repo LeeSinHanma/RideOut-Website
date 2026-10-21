@@ -21,3 +21,5 @@ Website UI captures come from the supplied `ride_out_assets` recordings. Crop co
 `convoyRider1.webp` through `convoyRider3.webp` are web-sized copies of `Motor1.png` through `Motor3.png`. Existing mascot and logo artwork was retained.
 
 `public/video/rideout-promo.mp4` is a 720 × 1280 H.264/AAC copy of `promo_video/output/RideOut_FINAL_Centered_1080x1920_30fps.mp4`, with fast-start metadata. `promoPoster.webp` is its frame at 32 seconds. The WebVTT captions are converted from `promo_video/review_final/captions.srt`. The player loads video only on user interaction (`preload="none"`).
+
+`public/audio/separation-alert.mp3` and `public/audio/sos-alert.mp3` are unchanged copies of `ride_out/assets/sounds/notification.mp3` and `alertSound.mp3`. The app's `SoundService` uses these for the out-of-circle chime and SOS siren respectively. The previews contain the sound assets; spoken announcements are generated separately in the app. Audio loads on demand with native playback and volume controls. Starting any audio or video pauses the other media players.

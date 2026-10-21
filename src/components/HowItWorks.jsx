@@ -12,14 +12,20 @@ export default function HowItWorks() {
     <section id="how-it-works" className="section-band">
       <div className="page-container section-space">
         <div className="section-heading"><p className="eyebrow">How it works</p><h2>From meetup to ride out.</h2><p>A shared plan before you leave. A shared map when you’re on the road.</p></div>
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="ride-steps-grid">
           {steps.map((step, index) => (
-            <article key={step.number} className="ride-step">
-              <div className="flex items-center justify-between mb-5"><span className="step-number">{step.number}</span><span className="step-icon material-symbols-outlined" aria-hidden="true">{step.icon}</span></div>
-              <div className="step-screen-stage">
-                <img src={[rideSetupDetail, joinRideDetail, convoyMapDetail][index]} alt={['Meetup point and destination fields with locations set for a new ride', 'Join Existing Session card with a six-character convoy code field and Join a Session button', 'Live convoy map showing rider markers together inside the group radius'][index]} loading="lazy" decoding="async" />
+            <article key={step.number} className="ride-step" style={{ '--step-index': index }}>
+              <div className="step-card">
+                <div className="step-copy">
+                  <div className="step-card-header"><span className="step-number">{step.number}</span><span className="step-icon material-symbols-outlined" aria-hidden="true">{step.icon}</span></div>
+                  <p className="step-chapter">Your shared ride / Step {step.number}</p>
+                  <h3>{step.title}</h3>
+                  <p className="step-description">{step.description}</p>
+                </div>
+                <div className="step-screen-stage">
+                  <img src={[rideSetupDetail, joinRideDetail, convoyMapDetail][index]} alt={['Meetup point and destination fields with locations set for a new ride', 'Join Existing Session card with a six-character convoy code field and Join a Session button', 'Live convoy map showing rider markers together inside the group radius'][index]} loading="lazy" decoding="async" />
+                </div>
               </div>
-              <h3 className="text-xl font-bold text-white mb-3">{step.title}</h3><p className="text-[#BEC8D2] text-sm leading-relaxed">{step.description}</p>
             </article>
           ))}
         </div>

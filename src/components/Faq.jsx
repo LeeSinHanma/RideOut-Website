@@ -1,7 +1,7 @@
 export default function Faq({ onPrivacyClick }) {
   const questions = [
     ['Who is RideOut for?', 'RideOut is built for riders who want to organize a group ride and see fellow riders in a shared session. Set a meetup, invite your group, and keep your ride details together.'],
-    ['Is RideOut available on my phone?', 'The Android beta is available on Google Play. An iOS version is planned, but is not available yet.'],
+    ['Is RideOut available on my phone?', 'RideOut is available exclusively for Android through Google Play. Download the beta from our Google Play listing.'],
     ['How much does RideOut PRO cost?', 'The annual plan costs ₱990, billed once per year. That works out to ₱82.50 per month and saves ₱798 compared with 12 monthly payments. The monthly plan costs ₱149 per month. Prices are in Philippine pesos.'],
     ['Do I need an internet connection?', 'Live group location sharing needs an internet connection and location access. Updates can be delayed when mobile coverage or GPS reception is poor.'],
     ['How does location sharing work?', 'RideOut uses location access to show rider positions during shared ride sessions. Review your permissions and the privacy policy for details about location data and how it is handled.'],

@@ -18,15 +18,15 @@ import approveWholeBody from '../assets/approveWholeBody.png';
 import sadFullBody from '../assets/sadFullBody.png';
 import proIconFace from '../assets/proIconFace.png';
 const screens = [
-  { id: 'map-ui', title: 'One map for your ride', description: 'See your meetup, destination, and fellow riders together.', src: mapUI },
-  { id: 'rider-ui', title: 'Meet your riding group', description: 'See who is in your convoy, check rider status, and invite your group.', src: riderUI },
-  { id: 'radio-ui', title: 'A quick callout to the group', description: 'Choose a preset signal for a fuel stop, hazard, or regroup.', src: radio },
-  { id: 'geofence-ui', title: 'Keep the pack in view', description: 'A group radius gives you a visual reference for staying together.', src: withinCircle },
-  { id: 'out-of-circle-ui', title: 'Notice a gap in the group', description: 'See when a rider is outside the group’s radius.', src: outOfCircle },
-  { id: 'sos-ui', title: 'Let your riders know you need help', description: 'Send a breakdown or SOS beacon so your convoy can see your alert and location.', src: SOS },
-  { id: 'telemetry-ui', title: 'A closer look at your ride', description: 'Explore the PRO telemetry options in your ride summary, including speed profiles and motion stats. Check the app for current availability.', src: advancedTelemetry, pro: true },
-  { id: 'create-ui', title: 'Your ride. Your way.', description: 'Choose a destination or go with the flow in Free Ride. Set your meetup before bringing the group along.', src: createRide },
-  { id: 'recap-ui', title: 'Keep the ride. Share the story.', description: 'Look back at your ride summary, then create a Convoy Story Card to save or share.', src: rideRecap },
+  { id: 'map-ui', title: 'One map for your ride', description: 'See your meetup, destination, and fellow riders together.', src: mapUI, ryderPose: 'ready' },
+  { id: 'rider-ui', title: 'Meet your riding group', description: 'See who is in your convoy, check rider status, and invite your group.', src: riderUI, ryderPose: 'welcome' },
+  { id: 'radio-ui', title: 'A quick callout to the group', description: 'Choose a preset signal for a fuel stop, hazard, or regroup.', src: radio, ryderPose: 'approve' },
+  { id: 'geofence-ui', title: 'Keep the pack in view', description: 'A group radius gives you a visual reference for staying together.', src: withinCircle, ryderPose: 'approve' },
+  { id: 'out-of-circle-ui', title: 'Notice a gap in the group', description: 'See when a rider is outside the group’s radius.', src: outOfCircle, ryderPose: 'sad' },
+  { id: 'sos-ui', title: 'Let your riders know you need help', description: 'Send a breakdown or SOS beacon so your convoy can see your alert and location.', src: SOS, ryderPose: 'sad' },
+  { id: 'telemetry-ui', title: 'A closer look at your ride', description: 'Explore the PRO telemetry options in your ride summary, including speed profiles and motion stats. Check the app for current availability.', src: advancedTelemetry, pro: true, ryderPose: 'ready' },
+  { id: 'create-ui', title: 'Your ride. Your way.', description: 'Choose a destination or go with the flow in Free Ride. Set your meetup before bringing the group along.', src: createRide, ryderPose: 'ready' },
+  { id: 'recap-ui', title: 'Keep the ride. Share the story.', description: 'Look back at your ride summary, then create a Convoy Story Card to save or share.', src: rideRecap, ryderPose: 'approve' },
 ];
 export default function ShowcaseGallery() {
   const [activeIndex, setActiveIndex] = useState(() => {
@@ -80,7 +80,7 @@ export default function ShowcaseGallery() {
             </button>
           ))}
         </div>
-        <div id="app-screen-preview" className="gallery-stage">
+        <div id="app-screen-preview" className="gallery-stage" data-ryder-pose={screen.ryderPose} data-ryder-message={screen.description}>
           <div className="gallery-description" aria-live="polite" aria-atomic="true">
             <p className="eyebrow flex items-center gap-3"><span className="gallery-number" aria-hidden="true">0{activeIndex + 1}</span>{screen.pro ? 'RideOut PRO' : 'Your ride, connected'}</p>
             <h3 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight mt-4 mb-5">{screen.title}</h3>
