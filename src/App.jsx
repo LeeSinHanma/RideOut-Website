@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
 import Header from './components/Header';
 import Hero from './components/Hero';
+import RideMission from './components/RideMission';
 import MascotIntroduction from './components/MascotIntroduction';
+import RyderCompanion from './components/RyderCompanion';
 import HowItWorks from './components/HowItWorks';
 import Plans from './components/Plans';
 import Faq from './components/Faq';
@@ -24,7 +26,7 @@ export default function App() {
         }
       });
     }, { threshold: 0.08 });
-    const elements = document.querySelectorAll('.section-heading, .surface-card, .ride-step, .gallery-stage');
+    const elements = document.querySelectorAll('.section-heading, .surface-card, .gallery-stage, .promo-stage');
     elements.forEach(element => {
       element.classList.add('scroll-reveal');
       observer.observe(element);
@@ -178,8 +180,13 @@ export default function App() {
     <div className="bg-[#0F172A] min-h-screen text-[#DAE2FD] font-['Inter',sans-serif] selection:bg-[#0EA5E9] selection:text-white">
       <Header />
 
-      <main id="main-content" tabIndex={-1} className="pt-20">
+      <main id="main-content" tabIndex={-1} className="pt-20" onPlayCapture={event => {
+        event.currentTarget.querySelectorAll('audio, video').forEach(media => {
+          if (media !== event.target) media.pause();
+        });
+      }}>
         <Hero />
+        <RideMission />
         <HowItWorks />
         <Features />
         <ShowcaseGallery />
@@ -193,6 +200,8 @@ export default function App() {
         onPrivacyClick={handleOpenPrivacy} 
         onTermsClick={handleOpenTerms}
       />
+
+      <RyderCompanion hidden={isPrivacyOpen || isTermsOpen} />
 
       <PrivacyPolicyModal
         isOpen={isPrivacyOpen}

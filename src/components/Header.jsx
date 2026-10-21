@@ -2,7 +2,7 @@ import appLogo from '../assets/appLogo.png';
 import DownloadLink from './DownloadLink';
 export default function Header() {
   return (
-    <header className="fixed top-0 w-full z-40 bg-[#0F172A]/95 backdrop-blur-md border-b border-[#334155]/60">
+    <header className="site-header fixed top-0 w-full z-40 bg-[#0F172A]/95 backdrop-blur-md border-b border-[#334155]/60">
       <a href="#main-content" className="skip-link">Skip to content</a>
       <div className="page-container flex items-center justify-between gap-4 h-20">
         <a href="#" className="flex items-center gap-2.5 font-extrabold text-xl text-white" aria-label="RideOut home"><img src={appLogo} alt="" className="w-9 h-9 object-contain" />RideOut</a>
@@ -11,6 +11,7 @@ export default function Header() {
         </nav>
         <DownloadLink compact />
       </div>
+      <div className="page-progress" aria-hidden="true" />
     </header>
   );
 }

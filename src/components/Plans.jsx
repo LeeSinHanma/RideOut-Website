@@ -74,7 +74,7 @@ export default function Plans() {
                 ) : (
                   <>
                     <p className="pricing-heading">Free plan</p>
-                    <p className="plan-price">₱0<span>/month</span></p>
+                    <p className="plan-price">FREE</p>
                     <p className="pricing-billing">Get your small pack started without a subscription.</p>
                   </>
                 )}
