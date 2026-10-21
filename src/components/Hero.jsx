@@ -1,4 +1,4 @@
-import mapUI from '../assets/mapUI.jpg';
+import mapUI from '../assets/mapUI.webp';
 import readyWholeBody from '../assets/readyWholeBody.png';
 import DownloadLink from './DownloadLink';
 export default function Hero() {
@@ -15,7 +15,7 @@ export default function Hero() {
         <p className="text-lg sm:text-xl text-[#BEC8D2] leading-relaxed mt-6 max-w-lg">Plan your meetup, see your group on the map, and stay connected throughout the ride.</p>
         <div className="flex flex-wrap items-center gap-5 mt-8">
           <DownloadLink />
-          <a href="#how-it-works" className="text-sm font-semibold text-white inline-flex items-center gap-2">See how it works <span className="material-symbols-outlined text-lg" aria-hidden="true">arrow_downward</span></a>
+          <a href="#ride-film" className="text-sm font-semibold text-white inline-flex items-center gap-2">Watch the ride <span className="material-symbols-outlined text-lg" aria-hidden="true">play_circle</span></a>
         </div>
         <p className="text-sm text-[#94A3B8] mt-4">Android beta available now. iOS is coming soon.</p>
         <div className="grid grid-cols-3 gap-3 border-t border-[#334155] mt-10 pt-6">
@@ -30,7 +30,7 @@ export default function Hero() {
         <span className="stage-coordinate" aria-hidden="true">14.5507° N / 121.0494° E</span>
         <div className="hero-phone w-full max-w-[285px]">
           <div className="rounded-[2rem] border-[5px] border-[#334155] bg-[#090D16] p-1.5 shadow-xl overflow-hidden">
-            <img src={mapUI} alt="RideOut map showing a BGC meetup, destination, two riders, and their invite code." width="995" height="2048" fetchPriority="high" className="w-full h-auto rounded-[1.5rem]" />
+            <img src={mapUI} alt="RideOut's live convoy map with a route through BGC, two rider markers, and group controls." width="720" height="1514" fetchPriority="high" className="w-full h-auto rounded-[1.5rem]" />
           </div>
         </div>
         <div className="ride-callout callout-top"><span className="material-symbols-outlined" aria-hidden="true">groups</span><div><strong>Your pack, connected.</strong><span>Same ride. Same map.</span></div><span className="status-dot" /></div>

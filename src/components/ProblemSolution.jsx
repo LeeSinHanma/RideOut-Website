@@ -2,7 +2,7 @@
 import sadFullBody from '../assets/sadFullBody.png';
 import sadIconFace from '../assets/sadIconFace.png';
 import approveWholeBody from '../assets/approveWholeBody.png';
-import withinCircle from '../assets/withinCircle.jpg';
+import withinCircle from '../assets/withinCircle.webp';
 
 export default function ProblemSolution() {
   return (

@@ -1,11 +1,17 @@
 import { useEffect, useState } from 'react';
-import mapUI from '../assets/mapUI.jpg';
-import riderUI from '../assets/riderUI.jpg';
-import radio from '../assets/radio.jpg';
-import SOS from '../assets/SOS.jpg';
-import withinCircle from '../assets/withinCircle.jpg';
-import outOfCircle from '../assets/outOfCircle.jpg';
-import advancedTelemetry from '../assets/advancedTelemetry.png';
+import mapUI from '../assets/mapUI.webp';
+import riderUI from '../assets/riderUI.webp';
+import radio from '../assets/radio.webp';
+import SOS from '../assets/SOS.webp';
+import withinCircle from '../assets/withinCircle.webp';
+import outOfCircle from '../assets/outOfCircle.webp';
+import advancedTelemetry from '../assets/advancedTelemetry.webp';
+import createRide from '../assets/createRide.webp';
+import rideRecap from '../assets/rideRecap.webp';
+import promoPoster from '../assets/promoPoster.webp';
+import convoyRider1 from '../assets/convoyRider1.webp';
+import convoyRider2 from '../assets/convoyRider2.webp';
+import convoyRider3 from '../assets/convoyRider3.webp';
 import welcomeWholeBody from '../assets/welcomeWholeBody.png';
 import readyWholeBody from '../assets/readyWholeBody.png';
 import approveWholeBody from '../assets/approveWholeBody.png';
@@ -13,12 +19,14 @@ import sadFullBody from '../assets/sadFullBody.png';
 import proIconFace from '../assets/proIconFace.png';
 const screens = [
   { id: 'map-ui', title: 'One map for your ride', description: 'See your meetup, destination, and fellow riders together.', src: mapUI },
-  { id: 'rider-ui', title: 'Meet your riding group', description: 'View the riders in your session and share an invitation.', src: riderUI },
+  { id: 'rider-ui', title: 'Meet your riding group', description: 'See who is in your convoy, check rider status, and invite your group.', src: riderUI },
   { id: 'radio-ui', title: 'A quick callout to the group', description: 'Choose a preset signal for a fuel stop, hazard, or regroup.', src: radio },
   { id: 'geofence-ui', title: 'Keep the pack in view', description: 'A group radius gives you a visual reference for staying together.', src: withinCircle },
   { id: 'out-of-circle-ui', title: 'Notice a gap in the group', description: 'See when a rider is outside the group’s radius.', src: outOfCircle },
-  { id: 'sos-ui', title: 'Let your riders know you need help', description: 'Send an SOS alert to your riding group.', src: SOS },
-  { id: 'telemetry-ui', title: 'A closer look at your ride', description: 'Explore additional ride statistics with RideOut PRO. Check the app for current availability.', src: advancedTelemetry, pro: true },
+  { id: 'sos-ui', title: 'Let your riders know you need help', description: 'Send a breakdown or SOS beacon so your convoy can see your alert and location.', src: SOS },
+  { id: 'telemetry-ui', title: 'A closer look at your ride', description: 'Explore the PRO telemetry options in your ride summary, including speed profiles and motion stats. Check the app for current availability.', src: advancedTelemetry, pro: true },
+  { id: 'create-ui', title: 'Your ride. Your way.', description: 'Choose a destination or go with the flow in Free Ride. Set your meetup before bringing the group along.', src: createRide },
+  { id: 'recap-ui', title: 'Keep the ride. Share the story.', description: 'Look back at your ride summary, then create a Convoy Story Card to save or share.', src: rideRecap },
 ];
 export default function ShowcaseGallery() {
   const [activeIndex, setActiveIndex] = useState(() => {
@@ -34,8 +42,8 @@ export default function ShowcaseGallery() {
     return () => window.removeEventListener('hashchange', syncScreen);
   }, []);
   const screen = screens[activeIndex];
-  const screenLabels = ['Group map', 'Your riders', 'Radio', 'Pack radius', 'Group alerts', 'SOS', 'Ride stats'];
-  const mascot = [welcomeWholeBody, readyWholeBody, approveWholeBody, approveWholeBody, sadFullBody, sadFullBody, proIconFace][activeIndex];
+  const screenLabels = ['Group map', 'Your riders', 'Radio', 'Pack radius', 'Group alerts', 'SOS', 'Ride stats', 'Ride setup', 'Ride recap'];
+  const mascot = [welcomeWholeBody, readyWholeBody, approveWholeBody, approveWholeBody, sadFullBody, sadFullBody, proIconFace, readyWholeBody, approveWholeBody][activeIndex];
   const selectScreen = index => {
     setActiveIndex(index);
     window.history.replaceState(null, '', `#screen-${screens[index].id}`);
@@ -43,6 +51,27 @@ export default function ShowcaseGallery() {
   return (
     <section id="showcase" className="section-band">
       <div className="page-container section-space">
+        <div id="ride-film" className="promo-stage">
+          <div className="promo-copy">
+            <p className="eyebrow">The RideOut film · 2 minutes</p>
+            <h2>Your next ride.<br /><span>With the whole pack.</span></h2>
+            <p>From the first meetup to the final stop, see how RideOut keeps your tropa connected along the way.</p>
+            <div className="promo-convoy" aria-hidden="true">
+              <img src={convoyRider2} alt="" width="280" height="280" loading="lazy" decoding="async" />
+              <img src={convoyRider1} alt="" width="280" height="280" loading="lazy" decoding="async" />
+              <img src={convoyRider3} alt="" width="280" height="280" loading="lazy" decoding="async" />
+            </div>
+            <p className="promo-tagline">Ride as one. No one left behind.</p>
+          </div>
+          <figure className="promo-player">
+            <video controls playsInline preload="none" poster={promoPoster} width="720" height="1280" aria-label="RideOut promotional film" aria-describedby="promo-caption">
+              <source src="/video/rideout-promo.mp4" type="video/mp4" />
+              <track kind="captions" src="/video/rideout-promo.vtt" srcLang="en" label="English / Taglish" />
+              <a href="/video/rideout-promo.mp4">Watch the RideOut film</a>
+            </video>
+            <figcaption id="promo-caption">Meet the map. Hear the callouts. Keep the memories.</figcaption>
+          </figure>
+        </div>
         <div className="section-heading"><p className="eyebrow">Inside RideOut</p><h2>Take it for a spin.</h2><p>Meet the map, the callouts, and the little things that keep your group together.</p></div>
         <div className="screen-selector" aria-label="Choose an app screen">
           {screens.map((item, index) => (
